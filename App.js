@@ -4,21 +4,21 @@ import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, Image } from
 export default function App() {
   const [screen, setScreen] = useState('lobby');
 
-  // கிட்ஹப்பில் நீங்கள் வைத்துள்ள துல்லியமான படங்களின் பெயர்கள்
+  // இமேஜஸ் ஃபோல்டரின் பெயருக்கு மாற்றப்பட்ட ஃபைல் பாதைகள்
   const images = {
-    lobby_bg: require('./assets/bg_cosmic_lobby.png'),
-    title_bg: require('./assets/bg_title_metamask.png'),
-    arena_bg: require('./assets/bg_zodiac_arena.png'),
-    swap_bg: require('./assets/bg_token_swap.png'),
-    reveal_bg: require('./assets/bg_aries_reveal.png'),
-    consult_bg: require('./assets/bg_astro_consultation.png'),
+    lobby_bg: require('./images/bg_cosmic_lobby.png'),
+    title_bg: require('./images/bg_title_metamask.png'),
+    arena_bg: require('./images/bg_zodiac_arena.png'),
+    swap_bg: require('./images/bg_token_swap.png'),
+    reveal_bg: require('./images/bg_aries_reveal.png'),
+    consult_bg: require('./images/bg_astro_consultation.png'),
     
-    btn_connect: require('./assets/btn_connect_metamask.png'),
-    btn_arena: require('./assets/btn_arena_activation.png'),
-    btn_claim: require('./assets/btn_claim_free_token.png'),
-    btn_pay: require('./assets/btn_pay_aymp_coin.png'),
-    panel_swap: require('./assets/panel_token_swap.png'),
-    panel_zodiac: require('./assets/panel_zodiac_selection.png'),
+    btn_connect: require('./images/btn_connect_metamask.png'),
+    btn_arena: require('./images/btn_arena_activation.png'),
+    btn_claim: require('./images/btn_claim_free_token.png'),
+    btn_pay: require('./images/btn_pay_aymp_coin.png'),
+    panel_swap: require('./images/panel_token_swap.png'),
+    panel_zodiac: require('./images/panel_zodiac_selection.png'),
   };
 
   return (
