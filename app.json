@@ -4,12 +4,25 @@
     "slug": "aymp-999xyz999",
     "version": "1.0.0",
     "orientation": "portrait",
+    "icon": "./images/bg_cosmic_lobby.png",
     "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./images/bg_cosmic_lobby.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0A0E1A"
+    },
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./images/bg_cosmic_lobby.png",
+        "backgroundColor": "#0A0E1A"
+      },
       "package": "com.aymponsomu.aymp999xyz999"
+    },
+    "web": {
+      "favicon": "./images/bg_cosmic_lobby.png"
     },
     "extra": {
       "eas": {
