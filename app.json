@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "AYMP 999xyz999",
-    "slug": "aymp-999xyz999-game",
+    "slug": "aymp-999xyz999",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
