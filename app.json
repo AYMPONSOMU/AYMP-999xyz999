@@ -4,25 +4,12 @@
     "slug": "aymp-999xyz999",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "https://github.com/expo/expo/raw/main/templates/expo-template-blank/assets/icon.png",
     "userInterfaceStyle": "dark",
-    "splash": {
-      "image": "https://github.com/expo/expo/raw/main/templates/expo-template-blank/assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#0A0E1A"
-    },
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "https://github.com/expo/expo/raw/main/templates/expo-template-blank/assets/adaptive-icon.png",
-        "backgroundColor": "#0A0E1A"
-      },
       "package": "com.aymponsomu.aymp999xyz999"
-    },
-    "web": {
-      "favicon": "https://github.com/expo/expo/raw/main/templates/expo-template-blank/assets/favicon.png"
     },
     "extra": {
       "eas": {
