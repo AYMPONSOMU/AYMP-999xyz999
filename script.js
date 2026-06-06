@@ -1,17 +1,16 @@
 const scenes = [
 
 {
-img:"images/bg_cosmic_lobby.png",
-title:"AYMP Cosmic Kingdom",
-text:"The Journey Begins..."
-},
-
-{
 img:"images/bg_title_metamask.png",
 title:"Wallet Gateway",
 text:"Connect Your Cosmic Identity"
 },
-
+  
+{
+img:"images/bg_cosmic_lobby.png",
+title:"AYMP Cosmic Kingdom",
+text:"The Journey Begins..."
+}
 {
 img:"images/bg_zodiac_gateway.png",
 title:"Choose Zodiac",
