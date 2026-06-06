@@ -22,7 +22,7 @@ background-repeat:no-repeat;
 
 display:flex;
 justify-content:center;
-align-items:flex-end;
+align-items:center;
 
 transition:all 0.8s ease;
 }
@@ -30,17 +30,17 @@ transition:all 0.8s ease;
 .overlay{
 
 width:100%;
-padding-bottom:5vh;
+max-width:700px;
+
+padding:20px;
 
 display:flex;
 flex-direction:column;
 align-items:center;
 
-background:linear-gradient(
-to top,
-rgba(0,0,0,0.75),
-rgba(0,0,0,0)
-);
+background:rgba(0,0,0,0.35);
+
+border-radius:20px;
 
 }
 
@@ -72,8 +72,8 @@ text-shadow:0 0 10px black;
 
 button{
 
-width:220px;
-height:60px;
+width:180px;
+height:50px;
 
 font-size:18px;
 font-weight:bold;
