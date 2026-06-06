@@ -13,7 +13,7 @@ text:"Connect Your Cosmic Identity"
 },
 
 {
-img:"images/panel_zodiac_selection.png",
+img:"images/bg_zodiac_gateway.png",
 title:"Choose Zodiac",
 text:"Select Your Destiny"
 },
