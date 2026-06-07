@@ -1,9 +1,5 @@
 const scenes = [
-  {
-    img: "images/bg_zodiac_gateway.png",
-    title: "TEST",
-    text: "Image Test"
-  },
+  
   {
     img: "images/bg_title_metamask.png",
     title: "Wallet Gateway",
