@@ -1,39 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AYMP Cosmic Kingdom</title>
+const scenes = [
+  {
+    img: "images/bg_zodiac_gateway.png",
+    title: "TEST",
+    text: "Image Test"
+  },
+  {
+    img: "images/bg_title_metamask.png",
+    title: "Wallet Gateway",
+    text: "Connect Your Cosmic Identity"
+  },
+  {
+    img: "images/bg_cosmic_lobby.png",
+    title: "AYMP Cosmic Kingdom",
+    text: "The Journey Begins..."
+  },
+  {
+    img: "images/bg_zodiac_gateway.png",
+    title: "Choose Zodiac",
+    text: "Select Your Destiny"
+  },
+  {
+    img: "images/bg_aries_reveal.png",
+    title: "Destiny Revealed",
+    text: "Your Journey Starts"
+  },
+  {
+    img: "images/bg_astro_consultation.png",
+    title: "Astro Consultation",
+    text: "Unlock Ancient Wisdom"
+  },
+  {
+    img: "images/bg_zodiac_arena.png",
+    title: "Zodiac Arena",
+    text: "Prove Your Power"
+  },
+  {
+    img: "images/bg_token_swap.png",
+    title: "Token Realm",
+    text: "XYZ → AYMP Path"
+  }
+];
 
-<link rel="stylesheet" href="style.css">
-</head>
+let current = 0;
 
-<body>
+const scene = document.getElementById("scene");
+const title = document.getElementById("title");
+const subtitle = document.getElementById("subtitle");
 
-  <div id="startScreen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:black; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
-    <h1 style="color:white; margin-bottom:20px; font-family:sans-serif;">AYMP Cosmic Kingdom</h1>
-    <button id="entryBtn" style="padding:15px 30px; font-size:18px; cursor:pointer; background:#f0a500; border:none; border-radius:5px; font-weight:bold; color:black;">Enter Realm</button>
-  </div>
+// முழு திரை மற்றும் லேண்ட்ஸ்கேப் மோடுக்கு மாற்றுவதற்கான ஃபங்ஷன்
+function enableLandscapeFullscreen() {
+    let element = document.documentElement;
 
-<div id="scene" class="scene">
+    // பிரவுசரை முழு திரைக்கு (Full Screen) மாற்றுதல்
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.webkitRequestFullscreen) { 
+            element.webkitRequestFullscreen();
+        } else if (element.mozRequestFullScreen) { 
+            element.mozRequestFullScreen();
+        } else if (element.msRequestFullscreen) { 
+            element.msRequestFullscreen();
+        }
+    }
 
-<div class="overlay">
+    // திரையை படுக்கை வசமாக (Landscape) லாக் செய்தல்
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('landscape').catch(function(error) {
+            console.log("Orientation Lock செய்ய முடியவில்லை: ", error);
+        });
+    }
+}
 
-<h1 id="title">AYMP Cosmic Kingdom</h1>
+function loadScene() {
+    scene.style.backgroundImage = `url('${scenes[current].img}')`;
+    title.innerText = scenes[current].title;
+    subtitle.innerText = scenes[current].text;
+}
 
-<p id="subtitle">
-The Journey Begins...
-</p>
+// கேம் தொடங்கும் போது முதல் சீன் லோடாகும்
+loadScene();
 
-<button id="nextBtn">
-ENTER KINGDOM
-</button>
+// அடுத்தடுத்த சீன்களுக்குச் செல்ல "Next" பட்டன் வேலை செய்யும் விதம்
+document.getElementById("nextBtn").addEventListener("click", () => {
+    current++;
+    if (current >= scenes.length) {
+        current = 0;
+    }
+    loadScene();
+});
 
-</div>
-
-</div>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+// முதல் திரையில் இருக்கும் "Enter Realm" பட்டனை கிளிக் செய்யும் போது நடப்பவை
+document.getElementById("entryBtn").addEventListener("click", () => {
+    // 1. முழு திரை மற்றும் லேண்ட்ஸ்கேப்பை ஆன் செய்யும்
+    enableLandscapeFullscreen();
+    
+    // 2. கறுப்பு நிற தொடக்கத் திரையை மறைத்து கேமிற்குள் அழைத்துச் செல்லும்
+    document.getElementById("startScreen").style.display = "none";
+});
