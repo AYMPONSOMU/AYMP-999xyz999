@@ -1,5 +1,4 @@
 const scenes = [
-  
   {
     img: "images/bg_title_metamask.png",
     title: "Wallet Gateway",
@@ -39,15 +38,20 @@ const scenes = [
 
 let current = 0;
 
+// HTML எலிமெண்டுகள்
 const scene = document.getElementById("scene");
 const title = document.getElementById("title");
 const subtitle = document.getElementById("subtitle");
+
+const zodiacPanel = document.getElementById("zodiacPanel");
+const destinyBtn = document.getElementById("destinyBtn");
+const destinyResult = document.getElementById("destinyResult");
+const powerArtImage = document.getElementById("powerArtImage");
 
 // முழு திரை மற்றும் லேண்ட்ஸ்கேப் மோடுக்கு மாற்றுவதற்கான ஃபங்ஷன்
 function enableLandscapeFullscreen() {
     let element = document.documentElement;
 
-    // பிரவுசரை முழு திரைக்கு (Full Screen) மாற்றுதல்
     if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
         if (element.requestFullscreen) {
             element.requestFullscreen();
@@ -60,7 +64,6 @@ function enableLandscapeFullscreen() {
         }
     }
 
-    // திரையை படுக்கை வசமாக (Landscape) லாக் செய்தல்
     if (screen.orientation && screen.orientation.lock) {
         screen.orientation.lock('landscape').catch(function(error) {
             console.log("Orientation Lock செய்ய முடியவில்லை: ", error);
@@ -68,16 +71,29 @@ function enableLandscapeFullscreen() {
     }
 }
 
+// "Choose Zodiac" சீன் வரும்போது பேனலைக் காட்டும் ஃபங்ஷன்
+function checkZodiacScene() {
+    if (scenes[current].title === "Choose Zodiac") {
+        if (zodiacPanel) zodiacPanel.style.display = "block";
+    } else {
+        if (zodiacPanel) zodiacPanel.style.display = "none";
+    }
+}
+
+// சீன்களை லோடு செய்யும் முதன்மை ஃபங்ஷன் (இப்போது பாதுகாப்பானது)
 function loadScene() {
     scene.style.backgroundImage = `url('${scenes[current].img}')`;
     title.innerText = scenes[current].title;
     subtitle.innerText = scenes[current].text;
+    
+    // ராசி தேர்ந்தெடுக்கும் பேனலைச் சரிபார்க்கிறது
+    checkZodiacScene();
 }
 
-// கேம் தொடங்கும் போது முதல் சீன் லோடாகும்
+// கேம் தொடங்கும்போது முதல் சீன் லோடாகும்
 loadScene();
 
-// அடுத்தடுத்த சீன்களுக்குச் செல்ல "Next" பட்டன் வேலை செய்யும் விதம்
+// அடுத்தடுத்த சீன்களுக்குச் செல்ல "Next" பட்டன்
 document.getElementById("nextBtn").addEventListener("click", () => {
     current++;
     if (current >= scenes.length) {
@@ -86,133 +102,61 @@ document.getElementById("nextBtn").addEventListener("click", () => {
     loadScene();
 });
 
-// முதல் திரையில் இருக்கும் "Enter Realm" பட்டனை கிளிக் செய்யும் போது நடப்பவை
+// முதல் திரையில் இருக்கும் "Enter Realm" பட்டன்
 document.getElementById("entryBtn").addEventListener("click", () => {
-    // 1. முழு திரை மற்றும் லேண்ட்ஸ்கேப்பை ஆன் செய்யும்
     enableLandscapeFullscreen();
-    
-    // 2. கறுப்பு நிற தொடக்கத் திரையை மறைத்து கேமிற்குள் அழைத்துச் செல்லும்
     document.getElementById("startScreen").style.display = "none";
 });
-const zodiacPanel =
-document.getElementById("zodiacPanel");
 
-const destinyBtn =
-document.getElementById("destinyBtn");
+// ராசி மற்றும் பெயர் மூலம் விதிப்பயனைக் கணக்கிடுதல்
+if (destinyBtn) {
+    destinyBtn.addEventListener("click", () => {
+        const zodiac = document.getElementById("zodiacSelect").value;
+        const name = document.getElementById("playerName").value;
 
-const destinyResult =
-document.getElementById("destinyResult");
-const powerArtImage =
-document.getElementById(
-"powerArtImage"
-);
-function checkZodiacScene(){
+        if (!zodiac || !name) {
+            destinyResult.innerHTML = "Choose Zodiac and Enter Name";
+            return;
+        }
 
-if(
-scenes[current].title ===
-"Choose Zodiac"
-){
+        let destiny = "";
+        let image = "";
 
-zodiacPanel.style.display =
-"block";
+        switch (zodiac) {
+            case "Aries":
+                destiny = "Cosmic Leader";
+                image = "images/yantra.png";
+                break;
+            case "Taurus":
+                destiny = "Prosperity Path";
+                image = "images/lakshmi.png";
+                break;
+            case "Gemini":
+                destiny = "Destiny Seeker";
+                image = "images/yantra1.png";
+                break;
+            case "Cancer":
+                destiny = "Shakti Awakening";
+                image = "images/shakti.png";
+                break;
+            case "Leo":
+                destiny = "Royal Destiny";
+                image = "images/yantra2.png";
+                break;
+            case "Virgo":
+                destiny = "Navagraha Wisdom";
+                image = "images/navagraha.png";
+                break;
+            default:
+                destiny = "Power Art Journey";
+                image = "images/powerart1.jpg";
+        }
 
-}else{
+        destinyResult.innerHTML = `${name}<br>${zodiac}<br>${destiny}`;
 
-zodiacPanel.style.display =
-"none";
-
-}
-
-}
-
-const oldLoadScene = loadScene;
-
-loadScene = function(){
-
-oldLoadScene();
-
-checkZodiacScene();
-
-};
-
-loadScene();
-
-destinyBtn.addEventListener(
-"click",
-()=>{
-
-const zodiac =
-document.getElementById(
-"zodiacSelect"
-).value;
-
-const name =
-document.getElementById(
-"playerName"
-).value;
-
-if(!zodiac || !name){
-
-destinyResult.innerHTML =
-"Choose Zodiac and Enter Name";
-
-return;
-
-}
-
-let destiny = "";
-let image = "";
-
-switch(zodiac){
-
-case "Aries":
-destiny = "Cosmic Leader";
-image = "images/yantra.png";
-break;
-
-case "Taurus":
-destiny = "Prosperity Path";
-image = "images/lakshmi.png";
-break;
-
-case "Gemini":
-destiny = "Destiny Seeker";
-image = "images/yantra1.png";
-break;
-
-case "Cancer":
-destiny = "Shakti Awakening";
-image = "images/shakti.png";
-break;
-
-case "Leo":
-destiny = "Royal Destiny";
-image = "images/yantra2.png";
-break;
-
-case "Virgo":
-destiny = "Navagraha Wisdom";
-image = "images/navagraha.png";
-break;
-
-default:
-destiny = "Power Art Journey";
-image = "images/powerart1.jpg";
-
-}
-
-destinyResult.innerHTML =
-
-`
-${name}<br>
-${zodiac}<br>
-${destiny}
-`;
-
-powerArtImage.src =
-image;
-
-powerArtImage.style.display =
-"block";
-
-
+        if (powerArtImage) {
+            powerArtImage.src = image;
+            powerArtImage.style.display = "block";
+        }
+    });
+                                }
