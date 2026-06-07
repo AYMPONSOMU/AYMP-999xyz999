@@ -159,4 +159,4 @@ if (destinyBtn) {
             powerArtImage.style.display = "block";
         }
     });
-                                
+}                          
