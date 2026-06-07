@@ -94,3 +94,93 @@ document.getElementById("entryBtn").addEventListener("click", () => {
     // 2. கறுப்பு நிற தொடக்கத் திரையை மறைத்து கேமிற்குள் அழைத்துச் செல்லும்
     document.getElementById("startScreen").style.display = "none";
 });
+const zodiacPanel =
+document.getElementById("zodiacPanel");
+
+const destinyBtn =
+document.getElementById("destinyBtn");
+
+const destinyResult =
+document.getElementById("destinyResult");
+
+function checkZodiacScene(){
+
+if(
+scenes[current].title ===
+"Choose Zodiac"
+){
+
+zodiacPanel.style.display =
+"block";
+
+}else{
+
+zodiacPanel.style.display =
+"none";
+
+}
+
+}
+
+const oldLoadScene = loadScene;
+
+loadScene = function(){
+
+oldLoadScene();
+
+checkZodiacScene();
+
+};
+
+loadScene();
+
+destinyBtn.addEventListener(
+"click",
+()=>{
+
+const zodiac =
+document.getElementById(
+"zodiacSelect"
+).value;
+
+const name =
+document.getElementById(
+"playerName"
+).value;
+
+if(!zodiac || !name){
+
+destinyResult.innerHTML =
+"Choose Zodiac and Enter Name";
+
+return;
+
+}
+
+const messages = [
+
+"Cosmic Leader",
+"Power Awakening",
+"Royal Destiny",
+"Hidden Wisdom",
+"Arena Champion",
+"Yantra Master"
+
+];
+
+const random =
+messages[
+Math.floor(
+Math.random()*messages.length
+)
+];
+
+destinyResult.innerHTML =
+
+`
+${name}<br>
+${zodiac}<br>
+${random}
+`;
+
+});
