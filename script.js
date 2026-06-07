@@ -102,7 +102,10 @@ document.getElementById("destinyBtn");
 
 const destinyResult =
 document.getElementById("destinyResult");
-
+const powerArtImage =
+document.getElementById(
+"powerArtImage"
+);
 function checkZodiacScene(){
 
 if(
