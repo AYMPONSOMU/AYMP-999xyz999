@@ -47,7 +47,7 @@ const scene = document.getElementById("scene");
 const title = document.getElementById("title");
 const subtitle = document.getElementById("subtitle");
 
-// 1. முழு திரை மற்றும் லேண்ட்ஸ்கேப் மோடுக்கு மாற்றுவதற்கான புதிய ஃபங்ஷன்
+// முழு திரை மற்றும் லேண்ட்ஸ்கேப் மோடுக்கு மாற்றுவதற்கான ஃபங்ஷன்
 function enableLandscapeFullscreen() {
     let element = document.documentElement;
 
@@ -55,11 +55,11 @@ function enableLandscapeFullscreen() {
     if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
         if (element.requestFullscreen) {
             element.requestFullscreen();
-        } else if (element.webkitRequestFullscreen) { /* Safari / Chrome Mobile */
+        } else if (element.webkitRequestFullscreen) { 
             element.webkitRequestFullscreen();
-        } else if (element.mozRequestFullScreen) { /* Firefox */
+        } else if (element.mozRequestFullScreen) { 
             element.mozRequestFullScreen();
-        } else if (element.msRequestFullscreen) { /* IE/Edge */
+        } else if (element.msRequestFullscreen) { 
             element.msRequestFullscreen();
         }
     }
@@ -81,16 +81,20 @@ function loadScene() {
 // கேம் தொடங்கும் போது முதல் சீன் லோடாகும்
 loadScene();
 
+// அடுத்தடுத்த சீன்களுக்குச் செல்ல "Next" பட்டன் வேலை செய்யும் விதம்
 document.getElementById("nextBtn").addEventListener("click", () => {
-    
-    // பயனர் "Next" பட்டனை கிளிக் செய்தவுடன் முழு திரை மற்றும் லேண்ட்ஸ்கேப் ஆன் ஆகும்
-    enableLandscapeFullscreen();
-
     current++;
-
     if (current >= scenes.length) {
         current = 0;
     }
-
     loadScene();
+});
+
+// முதல் திரையில் இருக்கும் "Enter Realm" பட்டனை கிளிக் செய்யும் போது நடப்பவை
+document.getElementById("entryBtn").addEventListener("click", () => {
+    // 1. முழு திரை மற்றும் லேண்ட்ஸ்கேப்பை ஆன் செய்யும்
+    enableLandscapeFullscreen();
+    
+    // 2. கறுப்பு நிற தொடக்கத் திரையை மறைத்து கேமிற்குள் அழைத்துச் செல்லும்
+    document.getElementById("startScreen").style.display = "none";
 });
