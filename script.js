@@ -160,30 +160,59 @@ return;
 
 }
 
-const messages = [
+let destiny = "";
+let image = "";
 
-"Cosmic Leader",
-"Power Awakening",
-"Royal Destiny",
-"Hidden Wisdom",
-"Arena Champion",
-"Yantra Master"
+switch(zodiac){
 
-];
+case "Aries":
+destiny = "Cosmic Leader";
+image = "images/yantra.png";
+break;
 
-const random =
-messages[
-Math.floor(
-Math.random()*messages.length
-)
-];
+case "Taurus":
+destiny = "Prosperity Path";
+image = "images/lakshmi.png";
+break;
+
+case "Gemini":
+destiny = "Destiny Seeker";
+image = "images/yantra1.png";
+break;
+
+case "Cancer":
+destiny = "Shakti Awakening";
+image = "images/shakti.png";
+break;
+
+case "Leo":
+destiny = "Royal Destiny";
+image = "images/yantra2.png";
+break;
+
+case "Virgo":
+destiny = "Navagraha Wisdom";
+image = "images/navagraha.png";
+break;
+
+default:
+destiny = "Power Art Journey";
+image = "images/powerart1.jpg";
+
+}
 
 destinyResult.innerHTML =
 
 `
 ${name}<br>
 ${zodiac}<br>
-${random}
+${destiny}
 `;
 
-});
+powerArtImage.src =
+image;
+
+powerArtImage.style.display =
+"block";
+
+
