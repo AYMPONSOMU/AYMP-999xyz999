@@ -160,3 +160,20 @@ if (destinyBtn) {
         }
     });
                                   }                          
+// எம்பளம் பட்டன் மற்றும் பாப்-அப் விண்டோவிற்கான ஜாவாஸ்கிரிப்ட்
+const emblemBtn = document.getElementById("emblemBtn");
+const infoModal = document.getElementById("infoModal");
+const closeInfoBtn = document.getElementById("closeInfoBtn");
+
+if (emblemBtn && infoModal && closeInfoBtn) {
+    // எம்பளத்தை தொட்டவுடன் விண்டோ ஓபன் ஆகும்
+    emblemBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // கேமின் மற்ற பட்டன்களை பாதிக்காமல் தடுக்க
+        infoModal.style.display = "block";
+    });
+
+    // க்ளோஸ் பட்டனை தொட்டவுடன் விண்டோ மூடிக்கொள்ளும்
+    closeInfoBtn.addEventListener("click", () => {
+        infoModal.style.display = "none";
+    });
+}
