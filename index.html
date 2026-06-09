@@ -46,7 +46,6 @@
             background: #222; color: #fff; border: 1px solid #f0a500; padding: 6px; border-radius: 6px; outline: none; cursor: pointer; margin-right: 35px;
         }
 
-        /* புதிய "X" க்ளோஸ் பட்டன் ஸ்டைல் */
         .close-x-btn {
             position: absolute;
             top: 15px;
@@ -61,9 +60,7 @@
             padding: 0;
             z-index: 100002;
         }
-        .close-x-btn:hover {
-            color: #fff;
-        }
+        .close-x-btn:hover { color: #fff; }
     </style>
 </head>
 <body>
@@ -132,6 +129,11 @@
             <select id="langSelect" onchange="changeLanguage(this.value)">
                 <option value="en">English</option>
                 <option value="ta">தமிழ்</option>
+                <option value="hi">हिन्दी (Hindi)</option>
+                <option value="zh">中文 (Chinese)</option>
+                <option value="ja">日本語 (Japanese)</option>
+                <option value="es">Español (Spanish)</option>
+                <option value="ar">العربية (Arabic)</option>
             </select>
         </div>
         
@@ -202,21 +204,58 @@
                 sec4Title: "📋 ஸ்மார்ட் காண்ட்ராக்ட் முகவரிகள் (BSC Network)",
                 sec5Title: "🚀 விரிவான பல வருட ரோடுமேப் (Roadmap)",
                 roadmap: "<p><strong>கட்டம் 1: தொடக்கம்</strong> – கேம் கட்டமைப்பு உருவாக்கம் மற்றும் டோக்கன் வெளியீடு. (முடிவடைந்தது) ✅</p><p><strong>கட்டம் 2: உலகளாவிய விரிவாக்கம்</strong> – வாலட் இணைப்பு மற்றும் எக்ஸ்சேஞ்ச் வர்த்தகம் தொடங்குதல். 🌐</p><p><strong>கட்டம் 3: ஆன்மீக நிதி</strong> – டோக்கன்களை ஸ்டேக்கிங் (Staking) செய்து லாபம் ஈட்டும் வசதி. 🪐</p><p><strong>கட்டம் 4: முழு ஆதிக்கம்</strong> – பரவலாக்கப்பட்ட தன்னாட்சி ஆலோசனை முறைகளை அறிமுகப்படுத்துதல். 👑</p>"
-            }
-        };
-
-        function changeLanguage(lang) {
-            document.getElementById("modalMainTitle").innerHTML = localTranslations[lang].mainTitle;
-            document.getElementById("sec1Title").innerHTML = localTranslations[lang].sec1Title;
-            document.getElementById("sec1Text").innerHTML = localTranslations[lang].sec1Text;
-            document.getElementById("sec2Title").innerHTML = localTranslations[lang].sec2Title;
-            document.getElementById("sec2List").innerHTML = localTranslations[lang].sec2List;
-            document.getElementById("sec3Title").innerHTML = localTranslations[lang].sec3Title;
-            document.getElementById("sec3Text").innerHTML = localTranslations[lang].sec3Text;
-            document.getElementById("sec4Title").innerHTML = localTranslations[lang].sec4Title;
-            document.getElementById("sec5Title").innerHTML = localTranslations[lang].sec5Title;
-            document.getElementById("roadmapText").innerHTML = localTranslations[lang].roadmap;
-        }
-    </script>
-</body>
-</html>
+            },
+            hi: {
+                mainTitle: "🪐 AYMP व्हाइटपेपर",
+                sec1Title: "🎯 मुख्य उद्देश्य और विजन",
+                sec1Text: "AYMP कॉस्मिक किंगडम वैदिक ज्योतिष के पवित्र, प्राचीन विज्ञान को आधुनिक Web3 तकनीकों के साथ जोड़ता है। इस प्लेटफॉर्म का अंतिम उद्देश्य वैश्विक उपयोगकर्ताओं को उनकी अद्वितीय ऊर्जा ब्लूप्रिंट की खोज करने, सटीक ब्रह्मांडीय मार्गदर्शन प्राप्त करने और व्यवस्थित रूप से उनकी आध्यात्मिक चेतना और वित्तीय कल्याण दोनों को ऊपर उठाने के लिए सशक्त बनाना है।",
+                sec2Title: "🎮 कैसे खेलें और प्लेटफॉर्म मैकेनिक्स",
+                sec2List: "<li style='margin-bottom:8px;'><strong>कॉस्मिक गेटवे:</strong> अपनी पहचान स्थापित करने के लिए अपने वॉलेट को कनेक्ट करें।</li><li style='margin-bottom:8px;'><strong>भाग्य संरेखण:</strong> अपनी प्रोफाइल दर्ज करें और अपनी राशि चुनें।</li><li style='margin-bottom:8px;'><strong>यंत्र प्रकटीकरण:</strong> सिस्टम आपके व्यक्तिगत उपाय और उन्नति के लिए शक्तिशाली ज्यामितीय आध्यात्मिक कला और यंत्र उत्पन्न करता है।</li>",
+                sec3Title: "🪙 डुअल-टोकन इकोनॉमिक मॉडल",
+                sec3Text: "निरंतर ट्रेडिंग वॉल्यूम और नेटवर्क स्वास्थ्य बनाए रखने के लिए, हम एक मजबूत, टिकाऊ दो-टोकन प्रणाली लागू करते हैं: 1. 999xyz999 टोकन (उपयोगिता) और 2. AYMP टोकन (लिक्विडिटी पूल द्वारा समर्थित मूल्य का भंडार)।",
+                sec4Title: "📋 स्मार्ट कॉन्ट्रैक्ट एड्रेस (BSC नेटवर्क)",
+                sec5Title: "🚀 विस्तारित बहु-वर्षीय रोडमैप",
+                roadmap: "<p><strong>चरण 1: जेनेसिस बेस</strong> – गेम फ्रेमवर्क परिनियोजन और टोकन निर्माण। (पूर्ण) ✅</p><p><strong>चरण 2: वैश्विक विस्तार</strong> – ऑन-चेन वॉलेट पेयरिंग सक्रियण। 🌐</p><p><strong>चरण 3: कॉस्मिक फाइनेंशियल्स</strong> – स्टेकिंग पूल और उच्च-उपज हार्वेस्टिंग लॉन्च करना। 🪐</p><p><strong>चरण 4: संप्रभु डोमिनियन</strong> – विकेंद्रीकृत स्वायत्त परामर्श तंत्र का शुभारंभ। 👑</p>"
+            },
+            zh: {
+                mainTitle: "🪐 AYMP 白皮书 (Whitepaper)",
+                sec1Title: "🎯 核心宗旨与愿景",
+                sec1Text: "AYMP Cosmic Kingdom 将神圣、古老的吠陀占星术与现代 Web3 技术相结合。该平台的最终目的是让全球用户能够发现自己独特的能量蓝图，接受精确的宇宙指引，并系统地提升他们的精神意识和财务福祉。",
+                sec2Title: "🎮 玩法与平台机制",
+                sec2List: "<li style='margin-bottom:8px;'><strong>宇宙网关：</strong> 连接您的 Web3 钱包以确立您的去中心化身份。</li><li style='margin-bottom:8px;'><strong>命运对齐：</strong> 输入您的个人信息并选择您的星座。</li><li style='margin-bottom:8px;'><strong>神圣图腾显现：</strong> 系统将根据您的星座计算自动生成强大、专属的几何精神艺术和图腾（Yantras），用于个人化解与提升。</li>",
+                sec3Title: "🪙 双代币经济模型",
+                sec3Text: "为了培养持续的交易量和稳健的网络健康，我们部署了一个强大、可持续的双代币系统：1. 999xyz999 代币（实用型）和 2. AYMP 代币（由去中心化流动性池支持的价值存储资产）。",
+                sec4Title: "📋 智能合约地址 (BSC 网络)",
+                sec5Title: "🚀 扩展的多年度路线图",
+                roadmap: "<p><strong>阶段 1: 创世基石</strong> – 游戏框架部署与经审计的代币生成。（已完成） ✅</p><p><strong>阶段 2: 全球扩张</strong> – 激活链上钱包配对及多交易所交易通道。 🌐</p><p><strong>阶段 3: 宇宙金融</strong> – 推出原生去中心化质押池和自动高收益收割。 🪐</p><p><strong>阶段 4: 主权领地</strong> – 推出专属的高级去中心化自治咨询机制。 👑</p>"
+            },
+            ja: {
+                mainTitle: "🪐 AYMP ホワイトペーパー",
+                sec1Title: "🎯 核心目的とビジョン",
+                sec1Text: "AYMP Cosmic Kingdomは、神聖で古代のヴェーダ占星術の科学と現代のWeb3テクノロジーを融合させます。このプラットフォームの究極の目的は、グローバルユーザーが独自のエネルギーブループリントを発見し、正確な宇宙の導きを受け取り、精神的意識と経済的幸福の両方を体系的に高めることができるようにすることです。",
+                sec2Title: "🎮 プレイ方法とシステムメカニクス",
+                sec2List: "<li style='margin-bottom:8px;'><strong>宇宙へのゲートウェイ:</strong> ウォレットを接続して、安全なアイデンティティを確立します。</li><li style='margin-bottom:8px;'><strong>運命の調整:</strong> プロファイルを入力し、星座を選択します。</li><li style='margin-bottom:8px;'><strong>ヤントラの発現:</strong> あなたの星座計算に基づいて、独自の強力な幾何学的精神アートとヤントラが生成されます。</li>",
+                sec3Title: "🪙 デュアルトークン経済モデル",
+                sec3Text: "継続的な取引量とネットワークの健全性を維持するため、堅牢で持続可能な2トークンシステムを採用しています：1. 999xyz999トークン（ユーティリティ）と2. AYMPトークン（流動性プールに裏打ちされた価値の保存）。",
+                sec4Title: "📋 スマートコントラクトアドレス (BSCネットワーク)",
+                sec5Title: "🚀 長期グローバルロードマップ",
+                roadmap: "<p><strong>フェーズ 1: ジェネシス</strong> – フレームワークの展開と監査済みトークンの生成。（完了） ✅</p><p><strong>フェーズ 2: グローバル拡大</strong> – オンチェーンウォレット接続の有効化。 🌐</p><p><strong>フェーズ 3: 宇宙金融</strong> – ステーキングプールの開設と自動収穫。 🪐</p><p><strong>フェーズ 4: 独立主権</strong> – 分散型自律コンサルティングメカニクスの開始。 👑</p>"
+            },
+            es: {
+                mainTitle: "🪐 AYMP LIBRO BLANCO",
+                sec1Title: "🎯 Propósito Central y Visión",
+                sec1Text: "AYMP Cosmic Kingdom une la sagrada y antigua ciencia de la astrología védica con las tecnologías modernas de la Web3. El propósito final de esta plataforma es empoderar a los usuarios globales para descubrir su plano energético único, recibir orientación cósmica precisa y elevar sistemáticamente tanto su conciencia espiritual como su bienestar financiero.",
+                sec2Title: "🎮 Cómo Jugar y Mecánicas de la Plataforma",
+                sec2List: "<li style='margin-bottom:8px;'><strong>Portal Cósmico:</strong> Conecte su billetera Web3 para establecer su identidad segura.</li><li style='margin-bottom:8px;'><strong>Alineación del Destino:</strong> Ingrese sus datos y seleccione su signo del zodiaco.</li><li style='margin-bottom:8px;'><strong>Manifestación de Yantras:</strong> El sistema genera arte espiritual geométrico y Yantras poderosos para su remedio y elevación personal.</li>",
+                sec3Title: "🪙 Modelo Económico de Doble Token",
+                sec3Text: "Para cultivar un volumen de negociación continuo, implementamos un sistema sostenible de dos tokens: 1. Token 999xyz999 (Utilidad) y 2. Token AYMP (Reserva de valor respaldada por fondos de liquidez).",
+                sec4Title: "📋 Direcciones de Contratos Inteligentes (Red BSC)",
+                sec5Title: "🚀 Hoja de Ruta Multianual Extendida",
+                roadmap: "<p><strong>Fase 1: Génesis</strong> – Despliegue de la estructura del juego y generación de tokens auditados. (Completado) ✅</p><p><strong>Fase 2: Expansión Global</strong> – Activación del emparejamiento de billeteras en cadena. 🌐</p><p><strong>Fase 3: Finanzas Cósmicas</strong> – Lanzamiento de fondos de staking descentralizados. 🪐</p><p><strong>Fase 4: Dominio Soberano</strong> – Lanzamiento de mecánicas de consultoría autónomas descentralizadas. 👑</p>"
+            },
+            ar: {
+                mainTitle: "🪐 AYMP الورقة البيضاء",
+                sec1Title: "🎯 الهدف الأساسي والرؤية",
+                sec1Text: "تجمع مملكة AYMP الكونية بين علم التنجيم الفيدي القديم والمقدس وتقنيات Web3 الحديثة. الغرض النهائي من هذه المنصة هو تمكين المستخدمين العالميين من اكتشاف مخطط طاقة فريد الخاص بهم، وتلقي توجيهات كونية دقيقة، ورفع وعيهم الروحي ورفاهيتهم المالية بشكل منهجي.",
+                sec2Title: "🎮 كيفية اللعب وآليات المنصة",
+                sec2List: "<li style='margin-bottom:8px;'><strong>البوابة الكونية:</strong> قم بتوصيل محفظتك الإلكترونية لإنشاء هويتك الآمنة.</li><li style='margin-bottom:8px;'><strong>محاذاة القدر:</strong> أدخل تفاصيل ملفك الشخصي واختر برجك الفلكي.</li><li style='margin-bottom:8px;'><strong>تجلي اليانترات:</strong> يقوم النظام بإنشاء فن روحي هندسي قوي ويانترات مخصصة لع
