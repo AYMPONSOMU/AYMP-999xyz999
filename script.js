@@ -119,12 +119,18 @@ if (emblemBtn && infoModal && closeInfoBtn) {
         infoModal.style.display = "none";
     };
 
-    window.onclick = function(e) {
-        if (e.target === infoModal) {
-            infoModal.style.display = "none";
-        }
-    };
-}
+    // Popup வெளியே தொட்டால் Close
+document.addEventListener("click", function(e){
+
+    if(
+        infoModal.style.display === "block" &&
+        !infoModal.contains(e.target) &&
+        e.target !== emblemBtn
+    ){
+        infoModal.style.display = "none";
+    }
+
+});
 
 // மொழி மாறும் போது டெக்ஸ்ட்களை மாற்றும் லாஜிக்
 if (langSelect) {
