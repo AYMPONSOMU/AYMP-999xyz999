@@ -28,73 +28,23 @@
             padding-bottom: 40px;
             box-sizing: border-box;
         }
-        #title {
-            font-size: 24px;
-            margin: 5px 0;
-        }
-        #subtitle {
-            font-size: 16px;
-            margin: 5px 0 15px 0;
-            color: #ccc;
-        }
-        #nextBtn {
-            padding: 10px 25px;
-            font-size: 16px;
-            cursor: pointer;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
+        #title { font-size: 24px; margin: 5px 0; }
+        #subtitle { font-size: 16px; margin: 5px 0 15px 0; color: #ccc; }
+        #nextBtn { padding: 10px 25px; font-size: 16px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 5px; font-weight: bold; }
+        
         #cornerLogo{
-            position:fixed;
-            right:15px;
-            bottom:15px;
-            width:90px;
-            height:auto;
-            z-index:10000;
-            opacity:0.95;
-            animation:
-            floatLogo 3s ease-in-out infinite,
-            glow 2s ease-in-out infinite;
+            position:fixed; right:15px; bottom:15px; width:90px; height:auto; z-index:10000; opacity:0.95;
+            animation: floatLogo 3s ease-in-out infinite, glow 2s ease-in-out infinite;
         }
+        @keyframes floatLogo{ 0%{ transform:translateY(0px); } 50%{ transform:translateY(-8px); } 100%{ transform:translateY(0px); } }
+        @keyframes glow{ 0%{ filter:drop-shadow(0 0 5px gold); } 50%{ filter:drop-shadow(0 0 20px gold); } 100%{ filter:drop-shadow(0 0 5px gold); } }
 
-        @keyframes floatLogo{
-            0%{ transform:translateY(0px); }
-            50%{ transform:translateY(-8px); }
-            100%{ transform:translateY(0px); }
-        }
-
-        @keyframes glow{
-            0%{ filter:drop-shadow(0 0 5px gold); }
-            50%{ filter:drop-shadow(0 0 20px gold); }
-            100%{ filter:drop-shadow(0 0 5px gold); }
-        }
-
-        .modal-content::-webkit-scrollbar {
-            width: 6px;
-        }
-        .modal-content::-webkit-scrollbar-thumb {
-            background-color: #f0a500;
-            border-radius: 4px;
-        }
-
-        .goog-te-gadget span {
-            display: none !important;
-        }
-        .goog-te-gadget {
-            color: transparent !important;
-            font-size: 0px !important;
-        }
-        .goog-te-combo {
-            background: #222 !important;
-            color: #fff !important;
-            border: 1px solid #f0a500 !important;
-            padding: 6px !important;
-            border-radius: 6px !important;
-            outline: none;
-            cursor: pointer;
+        .modal-content::-webkit-scrollbar { width: 6px; }
+        .modal-content::-webkit-scrollbar-thumb { background-color: #f0a500; border-radius: 4px; }
+        
+        /* மொழித் தேர்வுப் பெட்டி ஸ்டைல் */
+        #langSelect {
+            background: #222; color: #fff; border: 1px solid #f0a500; padding: 6px; border-radius: 6px; outline: none; cursor: pointer;
         }
     </style>
 </head>
@@ -115,7 +65,6 @@
                 <img src="images/999xyz999.png" width="30" alt="XYZ">
                 <span id="xyzBalance">100 XYZ</span>
             </div>
-
             <div style="background:rgba(0,0,0,0.6); padding:8px; border-radius:10px;">
                 <img src="images/favicon.png" width="30" alt="AYMP">
                 <span id="aympBalance">0 AYMP</span>
@@ -128,18 +77,9 @@
         <div id="zodiacPanel" style="display:none; text-align:center;">
             <select id="zodiacSelect">
                 <option value="">Choose Zodiac</option>
-                <option>Aries</option>
-                <option>Taurus</option>
-                <option>Gemini</option>
-                <option>Cancer</option>
-                <option>Leo</option>
-                <option>Virgo</option>
-                <option>Libra</option>
-                <option>Scorpio</option>
-                <option>Sagittarius</option>
-                <option>Capricorn</option>
-                <option>Aquarius</option>
-                <option>Pisces</option>
+                <option>Aries</option><option>Taurus</option><option>Gemini</option><option>Cancer</option>
+                <option>Leo</option><option>Virgo</option><option>Libra</option><option>Scorpio</option>
+                <option>Sagittarius</option><option>Capricorn</option><option>Aquarius</option><option>Pisces</option>
             </select>
             <br><br>
             <input id="playerName" type="text" placeholder="Enter Your Name" style="padding:10px;border-radius:8px;border:none;">
@@ -152,82 +92,50 @@
     </div>
 
     <button id="emblemBtn" style="
-        position: fixed; 
-        bottom: 20px; 
-        right: 20px; 
-        width: 80px; 
-        height: 80px; 
-        border-radius: 50%; 
-        border: 3px solid #f0a500; 
-        background: #000; 
-        box-shadow: 0 0 15px rgba(240, 165, 0, 0.9); 
-        z-index: 99999; 
-        cursor: pointer;
-        padding: 0;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: none;
+        position: fixed; bottom: 20px; right: 20px; width: 80px; height: 80px; border-radius: 50%; 
+        border: 3px solid #f0a500; background: #000; box-shadow: 0 0 15px rgba(240, 165, 0, 0.9); 
+        z-index: 99999; cursor: pointer; padding: 0; display: flex; justify-content: center; align-items: center;
     ">
-        <img src="images/favicon.png" alt="AYMP Emblem" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+        <img src="images/favicon.png" alt="AYMP Emblem" style="width: 100%; height: 100%; object-fit: cover;">
     </button>
 
     <div id="infoModal" style="
-        display: none; 
-        position: fixed; 
-        top: 50%; 
-        left: 50%; 
-        transform: translate(-50%, -50%); 
-        width: 85%; 
-        max-width: 580px; 
-        background: rgba(10, 10, 10, 0.98); 
-        color: white; 
-        border: 2px solid #f0a500; 
-        border-radius: 12px; 
-        padding: 22px; 
-        box-shadow: 0 0 30px rgba(240, 165, 0, 0.5); 
-        z-index: 100000; 
-        text-align: left;
-        font-family: sans-serif;
+        display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+        width: 85%; max-width: 580px; background: rgba(10, 10, 10, 0.98); color: white; 
+        border: 2px solid #f0a500; border-radius: 12px; padding: 22px; box-shadow: 0 0 30px rgba(240, 165, 0, 0.5); 
+        z-index: 100000; text-align: left;
     ">
         
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 10px;">
-            <h2 style="color: #f0a500; margin: 0; font-size: 20px; letter-spacing: 1px;">🪐 AYMP WHITEPAPER</h2>
-            <div id="google_translate_element"></div>
+            <h2 id="modalMainTitle" style="color: #f0a500; margin: 0; font-size: 20px; letter-spacing: 1px;">🪐 AYMP WHITEPAPER</h2>
+            <select id="langSelect">
+                <option value="en">English</option>
+                <option value="ta">தமிழ்</option>
+            </select>
         </div>
         
         <div class="modal-content" style="max-height: 380px; overflow-y: auto; margin-bottom: 15px; font-size: 14px; line-height: 1.6; padding-right: 5px;">
             
-            <h3 style="color: #007bff; margin: 10px 0 5px 0;">🎯 Core Purpose & Vision</h3>
-            <p style="margin: 0 0 15px 0; color: #e0e0e0; text-align: justify;">
+            <h3 id="sec1Title" style="color: #007bff; margin: 10px 0 5px 0;">🎯 Core Purpose & Vision</h3>
+            <p id="sec1Text" style="margin: 0 0 15px 0; color: #e0e0e0; text-align: justify;">
                 AYMP Cosmic Kingdom bridges the sacred, ancient science of Vedic Astrology with modern Web3 technologies. The ultimate purpose of this platform is to empower global users to discover their unique energetic blueprint, receive precise cosmic guidance, and systematically elevate both their spiritual consciousness and financial well-being.
             </p>
             
-            <h3 style="color: #007bff; margin: 15px 0 5px 0;">🎮 How to Play & Platform Mechanics</h3>
+            <h3 id="sec2Title" style="color: #007bff; margin: 15px 0 5px 0;">🎮 How to Play & Platform Mechanics</h3>
             <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px solid #333; margin-bottom: 15px;">
-                <ul style="margin: 0; padding-left: 20px; color: #ccc;">
+                <ul id="sec2List" style="margin: 0; padding-left: 20px; color: #ccc;">
                     <li style="margin-bottom: 8px;"><strong>Cosmic Gateway:</strong> Connect your non-custodial Web3 wallet (MetaMask or Trust Wallet) to establish your secure identity across the decentralized realm.</li>
                     <li style="margin-bottom: 8px;"><strong>Destiny Alignment:</strong> Input your custom profile details and select your Zodiac Sign. The algorithmic engine instantly processes your planetary alignment.</li>
                     <li style="margin-bottom: 8px;"><strong>Yantra Manifestation:</strong> Based on your customized zodiac computation, the platform generates unique, powerful, highly targeted geometric spiritual art and Yantras designed for your personal remedy and elevation.</li>
                 </ul>
             </div>
 
-            <h3 style="color: #007bff; margin: 15px 0 5px 0;">🪙 The Dual-Token Economic Model</h3>
-            <p style="margin: 0 0 10px 0; color: #e0e0e0;">
-                To cultivate continuous trading volume and bulletproof network health, we deploy a robust, sustainable two-token system:
-            </p>
-            <ul style="margin: 0 0 10px 0; padding-left: 20px; color: #ccc;">
-                <li style="margin-bottom: 4px;"><strong>1. 999xyz999 Token:</strong> The essential utility and access point token. Users spend this to unlock advanced daily horoscope logs, spiritual profiles, and rare Power Art minting.</li>
-                <li style="margin-bottom: 4px;"><strong>2. AYMP Token:</strong> Our primary flagship store-of-value asset, fully backed by extensive liquidity pools on decentralized automated market makers.</li>
-            </ul>
-            <p style="margin: 0 0 15px 0; background: rgba(240,165,0,0.1); padding: 10px; border-left: 3px solid #f0a500; font-size: 13px; font-weight: bold; color: #f0a500;">
-                🔄 Ecosystem Rule: Liquid assets are mathematically balanced to stimulate constant buy/sell activity. The strategic conversion ratio ensures high operational velocity across both token pairs worldwide.
+            <h3 id="sec3Title" style="color: #007bff; margin: 15px 0 5px 0;">🪙 The Dual-Token Economic Model</h3>
+            <p id="sec3Text" style="margin: 0 0 10px 0; color: #e0e0e0;">
+                To cultivate continuous trading volume and bulletproof network health, we deploy a robust, sustainable two-token system: 1. 999xyz999 Token (Utility) and 2. AYMP Token (Store of value backed by liquidity pools).
             </p>
 
-            <h3 style="color: #f0a500; margin: 15px 0 5px 0;">📋 Smart Contract Addresses (BSC Network)</h3>
+            <h3 id="sec4Title" style="color: #f0a500; margin: 15px 0 5px 0;">📋 Smart Contract Addresses (BSC Network)</h3>
             <div style="background: #111; padding: 12px; border-radius: 8px; font-family: monospace; font-size: 12px; margin-bottom: 15px; border: 1px solid #333; line-height: 1.5;">
                 <span style="color: #f0a500; font-weight: bold;">⭐ AYMP Token:</span><br>
                 <span style="color: #00ffcc; word-break: break-all;">0x6D85F3435EA87459AFC269E215Fa262AbD6C4EA1</span><br><br>
@@ -235,64 +143,22 @@
                 <span style="color: #00ffcc; word-break: break-all;">0xDF09Ebe8FC19C7345918f921c9C3dEda545c4AA7</span>
             </div>
 
-            <h3 style="color: #007bff; margin: 15px 0 5px 0;">🥞 Step-by-Step PancakeSwap Purchase Guide</h3>
-            <div style="background: rgba(0, 123, 255, 0.05); padding: 12px; border-radius: 8px; border: 1px dashed #007bff; margin-bottom: 15px; font-size: 13px; color: #ccc;">
-                <ol style="margin: 0; padding-left: 20px; line-height: 1.6;">
-                    <li>Ensure your wallet is connected to the <strong>BNB Smart Chain (BSC)</strong> network.</li>
-                    <li>Head over to the official exchange at <strong>pancakeswap.finance</strong>.</li>
-                    <li>Inside the Swap terminal, click on 'Select a Token' and paste either the AYMP or 999xyz999 contract address listed above.</li>
-                    <li>Click <strong>Import</strong>, set your preferred slippage tolerance, and execute the trade using BNB or USDT.</li>
-                </ol>
-            </div>
-
-            <h3 style="color: #f0a500; margin: 15px 0 5px 0;">🎁 Unified Reward Matrix</h3>
-            <ul style="margin: 0 0 15px 0; padding-left: 20px; color: #ccc; font-size: 13px;">
-                <li style="margin-bottom: 6px;"><strong>Power Arts Allocation:</strong> Selecting a zodiac unlocks highly curated, customized energetic spiritual talismans and digital yantras as performance boosters.</li>
-                <li style="margin-bottom: 6px;"><strong>Daily Check-in Rewards:</strong> Open the application daily to claim incremental, complimentary 999xyz999 tokens directly added to your layout balance.</li>
-                <li style="margin-bottom: 6px;"><strong>Decentralized Affiliate/Referral Program:</strong> Introduce friends to the gateway using your on-chain referral link to trigger instant reciprocal token bonuses for both parties.</li>
-            </ul>
-
-            <h3 style="color: #f0a500; margin: 15px 0 5px 0;">🚀 Extended Multi-Year Roadmap</h3>
-            <div style="border-left: 2px solid #007bff; padding-left: 15px; margin-left: 5px; color: #ccc; font-size: 13px; line-height: 1.7;">
-                <p style="margin: 0 0 10px 0;"><strong>Phase 1: Genesis Base</strong> – Structural game framework deployment, high-security audited dual-token asset generation, and initial DEX liquidity pool provisioning. (Completed) ✅</p>
-                <p style="margin: 0 0 10px 0;"><strong>Phase 2: Global Expansion</strong> – Activating decentralized on-chain wallet pairing setups, establishing multi-exchange swap channels, and tracking active global user accounts. 🌐</p>
-                <p style="margin: 0 0 10px 0;"><strong>Phase 3: Cosmic Financials</strong> – Launching native decentralized non-custodial Staking Pools, enabling automated high-yield harvesting, and pushing tailored astrological solutions directly inside gameplay. 🪐</p>
-                <p style="margin: 0 0 10px 0;"><strong>Phase 4: Sovereign Dominion</strong> – Launch of specialized premium decentralized autonomous consulting mechanics and cross-chain ecosystem scalability configurations. 👑</p>
-            </div>
-
-            <h3 style="color: #ff3366; margin: 15px 0 5px 0;">🛠️ Upcoming Pipeline (Future Implementations)</h3>
-            <div style="background: rgba(255, 51, 102, 0.08); padding: 12px; border-radius: 8px; border-left: 3px solid #ff3366; font-size: 13px; color: #ddd;">
-                <ul style="margin: 0; padding-left: 18px; line-height: 1.6;">
-                    <li><strong>Dynamic On-Chain Staking:</strong> Lock your tokens directly within our secure smart contract system to passively farm upgraded and exceedingly rare Power Arts/Yantras over time.</li>
-                    <li><strong>Astro NFT Marketplace:</strong> Fully tradeable web3 digital collectibles marketplace where players can list, trade, and exchange their premium zodiacal power talismans.</li>
-                </ul>
+            <h3 id="sec5Title" style="color: #f0a500; margin: 15px 0 5px 0;">🚀 Extended Multi-Year Roadmap</h3>
+            <div id="roadmapText" style="border-left: 2px solid #007bff; padding-left: 15px; margin-left: 5px; color: #ccc; font-size: 13px; line-height: 1.7;">
+                <p><strong>Phase 1: Genesis Base</strong> – Structural game framework deployment and audited token generation. (Completed) ✅</p>
+                <p><strong>Phase 2: Global Expansion</strong> – Activating on-chain wallet pairing and multi-exchange swap channels. 🌐</p>
+                <p><strong>Phase 3: Cosmic Financials</strong> – Launching staking pools and automated high-yield harvesting. 🪐</p>
+                <p><strong>Phase 4: Sovereign Dominion</strong> – Launch of decentralized autonomous consulting mechanics. 👑</p>
             </div>
 
         </div>
         
         <button id="closeInfoBtn" style="
-            display: block; 
-            width: 100%; 
-            padding: 12px; 
-            background: #f0a500; 
-            color: black; 
-            border: none; 
-            border-radius: 6px; 
-            font-weight: bold; 
-            font-size: 15px;
-            cursor: pointer;
+            display: block; width: 100%; padding: 12px; background: #f0a500; color: black; 
+            border: none; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer;
         ">Close Window</button>
     </div>
 
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en', 
-                includedLanguages: 'ta,en,hi,zh-CN,es,fr,de,ar,it,ja,ko,pt', 
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="script.js"></script>
 </body>
-    </html>
+                </html>
