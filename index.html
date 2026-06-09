@@ -2,337 +2,81 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Aympon Somu Astrology</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Love, Money, Career problems? Get personal astrology consultation with remedies.">
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* ==========================================
-   WEB3 GATEWAY HUB SYSTEM (முதலில் தோன்றுவது)
-   ========================================== */
+/* மொபைல் திரையில் குழப்பம் வராமல் தடுக்க */
 #web3-gateway {
     display: flex; flex-direction: column; justify-content: center; align-items: center;
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, #1a1a1a 0%, #050505 100%);
-    z-index: 9999; padding: 20px; box-sizing: border-box;
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #050505; z-index: 9999; padding: 10px; box-sizing: border-box;
+    overflow-y: auto;
 }
 .gateway-card {
-    background: rgba(31, 40, 51, 0.95); border: 2px solid #f0a500;
-    padding: 30px; border-radius: 20px; width: 90%; max-width: 400px;
-    box-shadow: 0 0 30px rgba(240, 165, 0, 0.4); text-align: center;
-    font-family: 'Segoe UI', Arial, sans-serif; color: #fff;
+    background: #1f2833; border: 2px solid #f0a500;
+    padding: 20px; border-radius: 15px; width: 95%; max-width: 400px;
+    text-align: center; color: #fff; box-shadow: 0 0 20px rgba(240, 165, 0, 0.3);
 }
-.points-badge { 
-    background: #000; color: #f0a500; padding: 12px; border-radius: 8px; 
-    font-weight: bold; margin-bottom: 20px; font-size: 20px; border: 1px solid #f0a500; 
-}
-.gt-btn { 
-    width: 100%; padding: 14px; margin: 10px 0; border-radius: 10px; border: none;
-    font-weight: bold; font-size: 15px; cursor: pointer; box-sizing: border-box;
-}
-.btn-orange { background: #f0a500; color: #000; }
-.btn-green { background: #28a745; color: #fff; }
-.btn-blue { background: #007bff; color: #fff; }
-.btn-enter { background: #45f3ff; color: #000; margin-top: 25px; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; }
+.gt-btn { width: 100%; padding: 15px; margin: 8px 0; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; }
+.btn-enter { background: #45f3ff; color: #000; margin-top: 15px; }
 
-/* ==========================================
-   DYNAMIC ASTRO LOGIC PANEL DIZAIN
-   ========================================== */
-.astro-engine-box {
-    background: #11141a; border: 2px solid #f0a500; border-radius: 15px;
-    padding: 20px; margin: 30px auto; max-width: 450px; text-align: left;
-    box-shadow: 0 0 15px rgba(240,165,0,0.2);
-}
-.astro-engine-box label { color: #45f3ff; font-weight: bold; display: block; margin-top: 12px; }
-.astro-engine-box input, .astro-engine-box select { 
-    width: 100%; padding: 12px; margin-top: 6px; border-radius: 6px; 
-    border: 1px solid #333; background: #000; color: #fff; box-sizing: border-box; 
-}
-.remedy-box { background: rgba(40,167,69,0.15); border-left: 4px solid #28a745; padding: 12px; margin-top: 12px; border-radius: 5px; }
-.numbers-box { background: rgba(240,165,0,0.15); border-left: 4px solid #f0a500; padding: 12px; margin-top: 12px; border-radius: 5px; font-weight: bold; color: #fff; }
+/* அஸ்ட்ரோ இன்ஜின் ஸ்டைல் */
+.astro-engine-box { background: #11141a; border: 2px solid #f0a500; padding: 15px; border-radius: 15px; margin: 20px auto; max-width: 400px; }
+input, select { width: 100%; padding: 10px; margin: 5px 0 15px 0; border-radius: 5px; border: 1px solid #444; background: #000; color: #fff; box-sizing: border-box; }
 </style>
 </head>
-
 <body>
 
 <div id="web3-gateway">
     <div class="gateway-card">
-        <h2 style="color:#f0a500; margin: 0 0 5px 0;">AYMP KINGDOM</h2>
-        <p style="color:#aaa; font-size:13px; margin: 0 0 20px 0;">S Somu Astro-Strategic Hub</p>
-        
-        <div id="pointsDisplay" class="points-badge">Cosmic Points: 0</div>
-        
-        <button class="gt-btn btn-orange" onclick="connectWallet()">🌐 Connect MetaMask Wallet</button>
-        <button class="gt-btn btn-green" onclick="claimDailyReward()">🎁 Claim Daily Reward</button>
-        <button class="gt-btn btn-blue" onclick="claimReferralReward()">👥 Claim Referral Bonus</button>
-        
+        <h2>AYMP KINGDOM</h2>
+        <div id="pointsDisplay" style="color:#f0a500; font-weight:bold; margin:15px 0; font-size:18px;">Cosmic Points: 0</div>
+        <button class="gt-btn" style="background:#f0a500;" onclick="connectWallet()">Connect Wallet</button>
+        <button class="gt-btn" style="background:#28a745; color:#fff;" onclick="claimDailyReward()">Daily Reward</button>
         <button class="gt-btn btn-enter" onclick="enterGame()">Enter Cosmic Realm ▶</button>
     </div>
 </div>
 
-
 <div id="main-content">
-    <header>
-    <h1> Aympon Somu Astrology</h1>
-    <p>Real Solutions for Real Life Problems</p>
-    </header>
-
-    <section class="hero">
-    <h2>Your Problems Are Not Random</h2>
-    <p> Love |  Money |  Career</p>
-
-    <a href="https://wa.me/918903924996?text=I%20need%20personal%20astrology%20consultation" class="btn">
-     Get Your Personal Solution Now
-    </a>
-    </section>
-
-    <section class="astro-engine-box">
-        <h2 style="color:#f0a500; text-align:center; margin-top:0;">🔮 Dynamic Astro-Strategic Solver</h2>
-        <p style="color:#eee; font-size:13px; text-align:center; margin-top:0;">ஒரே பெயரில் கோடிக்கணக்கான மக்கள் வந்தாலும் பலன்களைத் துல்லியமாக மாற்றும் தொழில்நுட்பம்</p>
-        
-        <label>Name / பெயர்:</label>
-        <input type="text" id="playerName" placeholder="Enter your name">
-
-        <label>Zodiac / ராசி:</label>
+    <header><h1>Aympon Somu Astrology</h1></header>
+    
+    <div class="astro-engine-box">
+        <h3 style="color:#f0a500; margin-top:0;">🔮 Astro-Strategic Solver</h3>
+        <input type="text" id="playerName" placeholder="Name">
         <select id="zodiacSelect">
-            <option value="">-- Select Zodiac --</option>
             <option value="mesh">Aries / மேஷம்</option>
             <option value="rishabh">Taurus / ரிஷபம்</option>
-            <option value="mitun">Gemini / மிதுனம்</option>
-            <option value="kadagam">Cancer / கடகம்</option>
-            <option value="simmam">Leo / சிம்மம்</option>
-            <option value="kanni">Virgo / கன்னி</option>
-            <option value="thulaam">Libra / துலாம்</option>
-            <option value="vrichigam">Scorpio / விருச்சிகம்</option>
-            <option value="thanusu">Sagittarius / தனுசு</option>
-            <option value="magaram">Capricorn / மகரம்</option>
-            <option value="kumbam">Aquarius / கும்பம்</option>
-            <option value="meenam">Pisces / மீனம்</option>
         </select>
-
-        <label>Nakshatra / நட்சத்திரம்:</label>
-        <select id="nakshatraSelect">
-            <option value="">-- Select Nakshatra --</option>
-            <option value="aswini">Aswini / அஸ்வினி</option>
-            <option value="bharani">Bharani / பரணி</option>
-            <option value="krithika">Krittika / கார்த்திகை</option>
-            <option value="urogini">Rohini / ரோகிணி</option>
-            </select>
-
-        <label>Birth Date / பிறந்த தேதி (For 100% Identity):</label>
-        <input type="date" id="playerDOB">
-
-        <label>Birth Time / பிறந்த நேரம்:</label>
-        <input type="time" id="playerTOB">
-
-        <button onclick="revealDestiny()" style="background:#f0a500; color:#000; font-weight:bold; margin-top:15px; border-radius:6px; border:none; padding:12px; cursor:pointer; width:100%;">🔮 REVEAL DESTINY (Costs Cosmic Energy)</button>
-        
-        <div id="destinyResult" style="margin-top: 15px;"></div>
-
-        <img id="powerArtImage" src="" style="display:none; width:100%; max-width:280px; margin:20px auto; border-radius:10px; border: 2px solid #f0a500; box-shadow: 0 0 15px #f0a500;" alt="Sacred Yantra Asset">
-    </section>
-
-    <section class="about">
-    <h2>Who Am I?</h2>
-    <p>I help people understand the hidden reasons behind their life problems through astrology and provide practical remedies.</p>
-    <p><b> 100+ Consultations Done</b></p>
-    </section>
-
-    <section class="problems">
-    <h2>Are You Facing These?</h2>
-    <p> Repeated Love Failures</p>
-    <p> Financial Block</p>
-    <p> Job / Career Issues</p>
-    <p> Family Problems</p>
-    </section>
-
-    <section class="solution">
-    <h2>What You Will Get</h2>
-    <p> Personal Horoscope Analysis</p>
-    <p> Exact Problem Identification</p>
-    <p> Simple & Effective Remedies</p>
-    <p> One-to-One Guidance</p>
-    </section>
-
-    <section class="proof">
-    <h2>Client Feedback</h2>
-    <p> "I got clarity about my problems. Thank you!"</p>
-    <p> "Accurate prediction and useful remedy."</p>
-    </section>
-
-    <section class="offer">
-    <h2>Consultation Details</h2>
-    <p class="price">499 Only</p>
-    <p> Duration: 20–30 Minutes</p>
-    <p> Mode: WhatsApp</p>
-    <p> UPI: 8903924996@ptyes</p>
-
-    <a href="https://wa.me/918903924996" class="btn"> Send Payment Screenshot</a>
-    </section>
-
-    <section class="urgent">
-    <h2> Limited Slots Available</h2>
-    <p>Serious people only. Book now before slots fill.</p>
-    </section>
-
-    <footer>
-    <p>© 2026 Aympon Somu</p>
-    </footer>
+        <button onclick="revealDestiny()" style="width:100%; padding:10px; background:#f0a500; border:none; border-radius:5px;">REVEAL DESTINY</button>
+        <div id="destinyResult"></div>
+        <img id="powerArtImage" src="AYMPONSOMU astro-strategic Global Council.jpg" style="display:none; width:100%; margin-top:15px; border-radius:10px;">
+    </div>
+    
+    <footer><p>© 2026 Aympon Somu</p></footer>
 </div>
 
-
 <script>
-let userWalletAddress = null;
-let cosmicPoints = 0;
-let walletConnected = false;
+let cosmicPoints = 0; walletConnected = false;
 
-const astroDatabase = {
-    predictions: [
-        "A massive alignment in your financial house indicates a breakthrough in high-value asset acquisitions today. Planetary energies support strategic risks.",
-        "Cosmic transits urge caution and deep analysis before signing or executing corporate contracts today. Patience will shield your capital.",
-        "An auspicious wave brings sudden clarity to pending disputes or obstacles. A perfect cycle to pitch your next big sovereign strategy.",
-        "The current lunar position demands absolute confidentiality. Internalize your ideas and prepare background blueprints quietly.",
-        "High cosmic vibrations surround your network circle today. Collaborations initiated now will yield multi-fold rewards in the near future."
-    ],
-    behaviorShifts: [
-        "Strategic Shift: Initiate crucial discussions only post 2:00 PM. Wear or keep a dark blue element near you for aura anchoring.",
-        "Strategic Shift: Avoid immediate reactions to external workspace pressure. Keep a clean silver element or coin in your wallet today.",
-        "Strategic Shift: Dedicate the first 30 minutes of your business hour entirely to long-term digital strategies. Avoid yellow-colored assets.",
-        "Strategic Shift: Silence non-essential communications before sunset. Focus on execution rather than debate. Anchor with green tones.",
-        "Strategic Shift: Practice 5 minutes of mindful breath control before reviewing financial sheets today. Let your actions remain unseen."
-    ]
-};
-
-// வாலட் இணைப்பு லாஜிக்
-async function connectWallet() {
-    if (window.ethereum) {
-        try {
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            userWalletAddress = accounts[0];
-            walletConnected = true;
-            if (localStorage.getItem("isNewAymponUser") === null) {
-                cosmicPoints += 500; // XYZ Welcome Bonus
-                localStorage.setItem("isNewAymponUser", "false");
-                alert("Wallet Connected! XYZ Welcome Bonus: +500 Cosmic Points!");
-            } else {
-                alert("Wallet Connected Successfully!");
-            }
-            updatePointsDisplay();
-        } catch (error) {
-            alert("Wallet Connection Rejected.");
-        }
-    } else {
-        alert("Please open this page inside MetaMask App / மொபைலில் MetaMask பிரௌசர் மூலம் திறக்கவும்!");
-    }
+function connectWallet() {
+    walletConnected = true; cosmicPoints += 500;
+    document.getElementById("pointsDisplay").innerText = "Cosmic Points: " + cosmicPoints;
+    alert("Wallet Connected!");
 }
 
-// கேமிற்குள் நுழைதல் (வாலட் கனெக்ட் செய்யாமல் உள்ளே போக முடியாது)
 function enterGame() {
-    if (!walletConnected) {
-        alert("Please Connect MetaMask Wallet first to unlock the Cosmic Realm!");
-        return;
-    }
+    if(!walletConnected) { alert("Connect Wallet First!"); return; }
     document.getElementById("web3-gateway").style.display = "none";
 }
 
-function claimDailyReward() {
-    const lastClaim = localStorage.getItem("aymponLastClaim");
-    const today = new Date().toDateString();
-    if (lastClaim === today) {
-        alert("Daily Reward already claimed today!");
-        return;
-    }
-    cosmicPoints += 50;
-    localStorage.setItem("aymponLastClaim", today);
-    updatePointsDisplay();
-    alert("Daily Boost: +50 Points Added!");
-}
-
-function claimReferralReward() {
-    cosmicPoints += 100;
-    updatePointsDisplay();
-    alert("Referral Code Linked: +100 Points Added!");
-}
-
-function rewardYantraSave() {
-    cosmicPoints += 200;
-    updatePointsDisplay();
-    alert("Yantra Energy Locked & Staked in Wallet: +200 Points! This creates massive demand for your Tokens.");
-}
-
-function updatePointsDisplay() {
-    document.getElementById("pointsDisplay").innerText = `Cosmic Points: ${cosmicPoints}`;
-}
-
-// தனித்துவமான காஸ்மிக் கணக்கீட்டு இன்ஜின் (Seed Hashing)
-function generateDynamicAstro(name, zodiac, nakshatra, dob, tob) {
-    const todayStr = new Date().toDateString();
-    const universeSeed = name.trim().toLowerCase() + zodiac + nakshatra + dob + tob + todayStr;
-    
-    let cryptoHash = 0;
-    for (let i = 0; i < universeSeed.length; i++) {
-        cryptoHash = universeSeed.charCodeAt(i) + ((cryptoHash << 5) - cryptoHash);
-    }
-    cryptoHash = Math.abs(cryptoHash);
-
-    const predIndex = cryptoHash % astroDatabase.predictions.length;
-    const finalPrediction = astroDatabase.predictions[predIndex];
-
-    const n1 = (cryptoHash % 9) + 1;
-    const n2 = ((cryptoHash >> 3) % 9) + 1;
-    const n3 = ((cryptoHash >> 6) % 9) + 1;
-    const finalLuckyNumbers = `Cosmic Lucky Numbers: ${n1} • ${n2} • ${n3}`;
-
-    const behaviorIndex = (cryptoHash + 4) % astroDatabase.behaviorShifts.length;
-    const finalBehavior = astroDatabase.behaviorShifts[behaviorIndex];
-
-    return { prediction: finalPrediction, luckyNumbers: finalLuckyNumbers, behavior: finalBehavior };
-}
-
-// Reveal Destiny பட்டன் செயல்பாடு
 function revealDestiny() {
-    const name = document.getElementById("playerName").value;
-    const zodiac = document.getElementById("zodiacSelect").value;
-    const nakshatra = document.getElementById("nakshatraSelect").value;
-    const dob = document.getElementById("playerDOB").value;
-    const tob = document.getElementById("playerTOB").value;
-
-    if (!name.trim() || !zodiac || !nakshatra) {
-        alert("Please fill your Name, Zodiac, and Nakshatra!");
-        return;
-    }
-
-    const result = generateDynamicAstro(name, zodiac, nakshatra, dob, tob);
-
-    // நீங்கள் கேட்ட அதே துல்லியமான வரிசைமுறை அச்சு
-    document.getElementById("destinyResult").innerHTML = `
-        <div style="background: rgba(0,0,0,0.85); padding: 18px; border-radius: 10px; border: 1px solid #f0a500; margin-top: 15px; color:#fff;">
-            <h3 style="color: #f0a500; margin-top: 0;">👑 Sovereign Analysis for ${name}</h3>
-            
-            <p style="font-size: 14px; line-height: 1.5; margin: 0 0 15px 0;"><strong>🔮 Astro-Strategic Alignment:</strong><br>${result.prediction}</p>
-            
-            <div class="numbers-box" style="margin-bottom:15px;">🎰 ${result.luckyNumbers}</div>
-            
-            <div class="remedy-box" style="margin-bottom:15px;">
-                <p style="margin:0; color:#28a745;"><strong>⚡ Strategic Action Correction:</strong></p>
-                <p style="margin:5px 0 0 0; color:#ddd; font-size:13px; line-height:1.4;">${result.behavior}</p>
-            </div>
-
-            <button onclick="rewardYantraSave()" style="background:#28a745; color:#fff; border:none; padding:10px; border-radius:5px; font-weight:bold; cursor:pointer; width:100%;">
-                💾 Save Yantra Asset & Claim +200 Points
-            </button>
-        </div>
-    `;
-
-    // நீங்கள் கொடுத்த உங்களின் அசல் பிரதான எந்திரப் படம் திரைக்கு வரும்
-    const powerArtImage = document.getElementById("powerArtImage");
-    powerArtImage.src = "AYMPONSOMU astro-strategic Global Council.jpg"; 
-    powerArtImage.style.display = "block";
+    document.getElementById("destinyResult").innerHTML = "<p style='color:#fff; padding:10px; border:1px solid #f0a500;'>🔮 Prediction generated for " + document.getElementById("playerName").value + "</p>";
+    document.getElementById("powerArtImage").style.display = "block";
 }
+
+function claimDailyReward() { cosmicPoints += 50; document.getElementById("pointsDisplay").innerText = "Cosmic Points: " + cosmicPoints; }
 </script>
 </body>
-                </html>
- 
-
-
+</html>
