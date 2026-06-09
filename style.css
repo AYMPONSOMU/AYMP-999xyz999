@@ -1,141 +1,187 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html,body{
-width:100%;
-height:100%;
-overflow:hidden;
-background:#000;
-font-family:Arial,sans-serif;
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    font-family: Arial, sans-serif;
 }
 
-.scene{
-width:100vw;
-height:100vh;
-
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-
-display:flex;
-justify-content:center;
-align-items:flex-end;
-
-transition:all 0.8s ease;
+/* முதன்மை கேம் திரை */
+#scene {
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    padding-bottom: 40px;
+    box-sizing: border-box;
+    transition: all 0.8s ease;
 }
 
-.overlay{
-
-width:100%;
-max-width:700px;
-
-padding:10px;
-
-display:flex;
-flex-direction:column;
-align-items:center;
-
-background:rgba(0,0,0,0.35);
-
-border-radius:20px;
-
+/* டைட்டில் மற்றும் சப்டைட்டில் ஸ்டைல் */
+#title {
+    font-size: clamp(20px, 3vw, 38px);
+    color: #ffd700;
+    text-shadow: 0 0 10px gold, 0 0 20px gold;
+    margin: 5px 0;
 }
 
-h1{
-
-font-size:clamp(20px,3vw,38px);
-
-color:#ffd700;
-
-text-shadow:
-0 0 10px gold,
-0 0 20px gold;
-
-margin-bottom:10px;
-
+#subtitle {
+    font-size: clamp(14px, 2vw, 20px);
+    color: #ccc;
+    margin: 5px 0 15px 0;
+    text-shadow: 0 0 10px black;
 }
 
-p{
-
-font-size:clamp(14px,2vw,20px);
-
-color:white;
-
-margin-bottom:20px;
-
-text-shadow:0 0 10px black;
-
+/* பொதுவான பட்டன் வடிவமைப்பு (Next, Entry, Destiny) */
+button {
+    width: 180px;
+    height: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(45deg, #0f3d91, #1e90ff);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #1e90ff, 0 0 25px #1e90ff;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-button{
-
-width:180px;
-height:50px;
-
-font-size:18px;
-font-weight:bold;
-
-color:white;
-
-background:
-linear-gradient(
-45deg,
-#0f3d91,
-#1e90ff
-);
-
-border:none;
-
-border-radius:15px;
-
-box-shadow:
-0 0 15px #1e90ff,
-0 0 25px #1e90ff;
-
-cursor:pointer;
-
-transition:0.3s;
-
+button:hover {
+    transform: scale(1.08);
 }
 
-button:hover{
-
-transform:scale(1.08);
-
+button:active {
+    transform: scale(0.95);
 }
 
-button:active{
-
-transform:scale(0.95);
-
+/* தொடக்கத் திரை (Start Screen) சிறப்புப் பட்டன் */
+#entryBtn {
+    background: linear-gradient(45deg, #f0a500, #ffd700);
+    color: black;
+    box-shadow: 0 0 15px #f0a500, 0 0 25px #f0a500;
 }
 
-@media (orientation:portrait){
-
-body::before{
-
-content:"Please rotate your device";
-
-position:fixed;
-top:0;
-left:0;
-
-width:100%;
-height:100%;
-
-background:black;
-color:white;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-font-size:24px;
-z-index:9999;
-
+/* ராசி பேனல் வடிவமைப்பு */
+#zodiacPanel {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #f0a500;
+    margin-bottom: 15px;
+    box-shadow: 0 0 15px rgba(240, 165, 0, 0.3);
+    max-width: 90%;
 }
 
+#zodiacSelect, #playerName {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background: #111;
+    color: white;
+    font-size: 14px;
+    width: 200px;
+    outline: none;
 }
+
+#zodiacSelect:focus, #playerName:focus {
+    border-color: #f0a500;
+    box-shadow: 0 0 8px #f0a500;
+}
+
+/* மிதக்கும் லோகோ அனிமேஷன் */
+#cornerLogo {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    width: 90px;
+    height: auto;
+    z-index: 10000;
+    opacity: 0.95;
+    animation: floatLogo 3s ease-in-out infinite, glow 2s ease-in-out infinite;
+}
+
+@keyframes floatLogo {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes glow {
+    0% { filter: drop-shadow(0 0 5px gold); }
+    50% { filter: drop-shadow(0 0 20px gold); }
+    100% { filter: drop-shadow(0 0 5px gold); }
+}
+
+/* ==========================================================================
+   புதிய ஒயிட்பேப்பர் பாப்-அப் (Info Modal) மற்றும் எம்பளம் ஸ்டைல்கள்
+   ========================================================================== */
+
+/* பாப்-அப் விண்டோ உள்ளடக்கப் பகுதி (Scroll Container) */
+.modal-content {
+    max-height: 55vh; /* மொபைல் திரைகளுக்கு ஏற்றவாறு தானாக சுருங்கும் */
+    overflow-y: auto;
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 1.6;
+    padding-right: 8px;
+}
+
+/* ஒயிட்பேப்பருக்கான பிரத்யேக பிரீமியம் ஸ்க்ரோல்பார் */
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: #f0a500;
+    border-radius: 4px;
+    box-shadow: 0 0 5px #f0a500;
+}
+
+/* க்ளோஸ் பட்டன் பிரத்யேக ஸ்டைல் */
+#closeInfoBtn {
+    width: 100%;
+    height: 45px;
+    background: linear-gradient(45deg, #e69500, #f0a500);
+    color: black;
+    box-shadow: 0 0 10px rgba(240, 165, 0, 0.4);
+    border-radius: 10px;
+}
+
+/* போர்ட்ரெய்ட் மோடு எச்சரிக்கை திரை (Orientation Rule) */
+@media (orientation: portrait) {
+    body::before {
+        content: "Please rotate your device";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        z-index: 999999; /* அனைத்து எலிமெண்டுகளுக்கும் மேலே தெரியுமாறு உயர்த்தப்பட்டுள்ளது */
+    }
+  }
