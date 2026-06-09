@@ -224,18 +224,68 @@ border-radius:12px;
     </div>
 
     <script src="script.js"></script>
-    <img src="favicon.png" 
+    <button id="emblemBtn" style="
     position: fixed; 
-    bottom: 10px; 
-    right: 10px; 
+    bottom: 20px; 
+    right: 20px; 
     width: 80px; 
     height: 80px; 
     border-radius: 50%; 
     border: 3px solid #f0a500; 
+    background: url('favicon.png') no-repeat center;
+    background-size: cover;
     box-shadow: 0 0 15px rgba(240, 165, 0, 0.9); 
     z-index: 99999; 
-    pointer-events: none;
+    cursor: pointer;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+"></button>
+
+<div id="infoModal" style="
+    display: none; 
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 80%; 
+    max-width: 500px; 
+    background: rgba(0, 0, 0, 0.95); 
+    color: white; 
+    border: 2px solid #f0a500; 
+    border-radius: 10px; 
+    padding: 20px; 
+    box-shadow: 0 0 25px rgba(0,0,0,0.8); 
+    z-index: 100000; 
+    text-align: left;
+    font-family: sans-serif;
 ">
+    <h2 style="color: #f0a500; margin-top: 0; text-align: center; border-bottom: 1px solid #333; padding-bottom: 10px;">AYMP Realm Info</h2>
+    
+    <div style="max-height: 250px; overflow-y: auto; margin-bottom: 15px; font-size: 14px; line-height: 1.6;">
+        <h3 style="color: #007bff; margin: 10px 0 5px 0;">🎮 Game Details:</h3>
+        <p style="margin: 0 0 10px 0;">Welcome to AYMP Cosmic Kingdom. Journey through the 12 Zodiac signs, unlock ancient wisdom, and discover your true destiny in the stars.</p>
+        
+        <h3 style="color: #007bff; margin: 10px 0 5px 0;">🪙 Token Details (999xyz999):</h3>
+        <p style="margin: 0;">• Token Name: 999xyz999<br>
+        • Network: Binance Smart Chain (BSC)<br>
+        • Platform: Liquidity Pool successfully initialized.<br>
+        • Conversion: 2000 = 999xyz999 KU 4AYMP</p>
+    </div>
+    
+    <button id="closeInfoBtn" style="
+        display: block; 
+        width: 100%; 
+        padding: 10px; 
+        background: #f0a500; 
+        color: black; 
+        border: none; 
+        border-radius: 5px; 
+        font-weight: bold; 
+        cursor: pointer;
+    ">Close Window</button>
+</div>
 </body>
     
 </html>
