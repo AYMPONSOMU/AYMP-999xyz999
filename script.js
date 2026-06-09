@@ -80,11 +80,11 @@ function checkZodiacScene() {
     }
 }
 
-// சீன்களை லோடு செய்யும் முதன்மை ஃபங்ஷன் (இப்போது பாதுகாப்பானது)
+// சீன்களை லோடு செய்யும் முதன்மை ஃபங்ஷன்
 function loadScene() {
-    scene.style.backgroundImage = `url('${scenes[current].img}')`;
-    title.innerText = scenes[current].title;
-    subtitle.innerText = scenes[current].text;
+    if (scene) scene.style.backgroundImage = `url('${scenes[current].img}')`;
+    if (title) title.innerText = scenes[current].title;
+    if (subtitle) subtitle.innerText = scenes[current].text;
     
     // ராசி தேர்ந்தெடுக்கும் பேனலைச் சரிபார்க்கிறது
     checkZodiacScene();
@@ -94,28 +94,38 @@ function loadScene() {
 loadScene();
 
 // அடுத்தடுத்த சீன்களுக்குச் செல்ல "Next" பட்டன்
-document.getElementById("nextBtn").addEventListener("click", () => {
-    current++;
-    if (current >= scenes.length) {
-        current = 0;
-    }
-    loadScene();
-});
+const nextBtn = document.getElementById("nextBtn");
+if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+        current++;
+        if (current >= scenes.length) {
+            current = 0;
+        }
+        loadScene();
+    });
+}
 
 // முதல் திரையில் இருக்கும் "Enter Realm" பட்டன்
-document.getElementById("entryBtn").addEventListener("click", () => {
-    enableLandscapeFullscreen();
-    document.getElementById("startScreen").style.display = "none";
-});
+const entryBtn = document.getElementById("entryBtn");
+if (entryBtn) {
+    entryBtn.addEventListener("click", () => {
+        enableLandscapeFullscreen();
+        const startScreen = document.getElementById("startScreen");
+        if (startScreen) startScreen.style.display = "none";
+    });
+}
 
 // ராசி மற்றும் பெயர் மூலம் விதிப்பயனைக் கணக்கிடுதல்
 if (destinyBtn) {
     destinyBtn.addEventListener("click", () => {
-        const zodiac = document.getElementById("zodiacSelect").value;
-        const name = document.getElementById("playerName").value;
+        const zodiacSelect = document.getElementById("zodiacSelect");
+        const playerName = document.getElementById("playerName");
+
+        const zodiac = zodiacSelect ? zodiacSelect.value : "";
+        const name = playerName ? playerName.value : "";
 
         if (!zodiac || !name) {
-            destinyResult.innerHTML = "Choose Zodiac and Enter Name";
+            if (destinyResult) destinyResult.innerHTML = "Choose Zodiac and Enter Name";
             return;
         }
 
@@ -152,28 +162,38 @@ if (destinyBtn) {
                 image = "images/powerart1.jpg";
         }
 
-        destinyResult.innerHTML = `${name}<br>${zodiac}<br>${destiny}`;
+        if (destinyResult) destinyResult.innerHTML = `${name}<br>${zodiac}<br>${destiny}`;
 
         if (powerArtImage) {
             powerArtImage.src = image;
             powerArtImage.style.display = "block";
         }
     });
-                                  }                          
-// எம்பளம் பட்டன் மற்றும் பாப்-அப் விண்டோவிற்கான ஜாவாஸ்கிரிப்ட்
-const emblemBtn = document.getElementById("emblemBtn");
-const infoModal = document.getElementById("infoModal");
-const closeInfoBtn = document.getElementById("closeInfoBtn");
-
-if (emblemBtn && infoModal && closeInfoBtn) {
-    // எம்பளத்தை தொட்டவுடன் விண்டோ ஓபன் ஆகும்
-    emblemBtn.addEventListener("click", (e) => {
-        e.stopPropagation(); // கேமின் மற்ற பட்டன்களை பாதிக்காமல் தடுக்க
-        infoModal.style.display = "block";
-    });
-
-    // க்ளோஸ் பட்டனை தொட்டவுடன் விண்டோ மூடிக்கொள்ளும்
-    closeInfoBtn.addEventListener("click", () => {
-        infoModal.style.display = "none";
-    });
 }
+
+// HTML முழுமையாக லோடு ஆன பின் எம்பளம் பட்டன் மற்றும் பாப்-அப் விண்டோவை இணைக்கும் பகுதி
+window.addEventListener("DOMContentLoaded", () => {
+    const emblemBtn = document.getElementById("emblemBtn");
+    const infoModal = document.getElementById("infoModal");
+    const closeInfoBtn = document.getElementById("closeInfoBtn");
+
+    if (emblemBtn && infoModal && closeInfoBtn) {
+        // எம்பளத்தை தொட்டவுடன் விண்டோ ஓபன் ஆகும்
+        emblemBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); // கேமின் மற்ற பேக்ரவுண்ட் கிளிக்குகளைத் தடுக்க
+            infoModal.style.display = "block";
+        });
+
+        // க்ளோஸ் பட்டனை தொட்டவுடன் விண்டோ மூடிக்கொள்ளும்
+        closeInfoBtn.addEventListener("click", () => {
+            infoModal.style.display = "none";
+        });
+
+        // விண்டோவிற்கு வெளியே எங்கு தொட்டாலும் மூடிக்கொள்ளும் கூடுதல் வசதி
+        window.addEventListener("click", (e) => {
+            if (e.target === infoModal) {
+                infoModal.style.display = "none";
+            }
+        });
+    }
+});
