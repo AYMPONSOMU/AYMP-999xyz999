@@ -47,57 +47,29 @@
             border-radius: 5px;
             font-weight: bold;
         }
-        #cornerLogo{
+        
+        /* தொடக்கத் திரை லோகோவிற்கான ஸ்டைல் */
+        #cornerLogo {
+            position: fixed;
+            right: 15px;
+            bottom: 15px;
+            width: 90px;
+            height: auto;
+            z-index: 10000;
+            opacity: 0.95;
+            animation: floatLogo 3s ease-in-out infinite, glow 2s ease-in-out infinite;
+        }
 
-position:fixed;
+        @keyframes floatLogo {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
 
-right:15px;
-bottom:15px;
-
-width:90px;
-
-height:auto;
-
-z-index:10000;
-
-opacity:0.95;
-
-animation:
-floatLogo 3s ease-in-out infinite,
-glow 2s ease-in-out infinite;
-
-}
-
-@keyframes floatLogo{
-
-0%{
-transform:translateY(0px);
-}
-
-50%{
-transform:translateY(-8px);
-}
-
-100%{
-transform:translateY(0px);
-}
-
-}
-
-@keyframes glow{
-
-0%{
-filter:drop-shadow(0 0 5px gold);
-}
-
-50%{
-filter:drop-shadow(0 0 20px gold);
-}
-
-100%{
-filter:drop-shadow(0 0 5px gold);
-}
-
+        @keyframes glow {
+            0% { filter: drop-shadow(0 0 5px gold); }
+            50% { filter: drop-shadow(0 0 20px gold); }
+            100% { filter: drop-shadow(0 0 5px gold); }
         }
     </style>
 </head>
@@ -106,186 +78,127 @@ filter:drop-shadow(0 0 5px gold);
     <div id="startScreen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:black; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
         <h1 style="color:white; margin-bottom:20px;">AYMP Cosmic Kingdom</h1>
         <button id="entryBtn" style="padding:15px 30px; font-size:18px; cursor:pointer; background:#f0a500; border:none; border-radius:5px; font-weight:bold; color:black;">Enter Realm</button>
-        <div
-style="
-margin-top:20px;
-padding:12px;
-background:rgba(255,215,0,0.15);
-border:1px solid gold;
-border-radius:10px;
-color:white;
-text-align:center;
-max-width:280px;
-">
-
-👑 Touch the AYMP Emblem<br>
-to learn about the game,<br>
-tokens, rewards and roadmap.
-
+        
+        <div style="margin-top:20px; padding:12px; background:rgba(255,215,0,0.15); border:1px solid gold; border-radius:10px; color:white; text-align:center; max-width:280px;">
+            👑 Touch the AYMP Emblem<br>
+            to learn about the game,<br>
+            tokens, rewards and roadmap.
         </div>
-        <img
-id="cornerLogo"
-src="images/favicon.png"
-alt="AYMP Logo"
->
+        
+        <img id="cornerLogo" src="images/favicon.png" alt="AYMP Logo">
     </div>
 
     <div id="scene">
-        <div id="tokenBar"
-style="
-position:absolute;
-top:10px;
-left:10px;
-right:10px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-z-index:1000;
-">
+        <div id="tokenBar" style="position:absolute; top:10px; left:10px; right:10px; display:flex; justify-content:space-between; align-items:center; z-index:1000;">
+            <div style="background:rgba(0,0,0,0.6); padding:8px; border-radius:10px; display: flex; align-items: center; gap: 5px;">
+                <img src="images/999xyz999.png" width="30" alt="XYZ">
+                <span id="xyzBalance">100 XYZ</span>
+            </div>
 
-<div
-style="
-background:rgba(0,0,0,0.6);
-padding:8px;
-border-radius:10px;
-">
-<img
-src="images/999xyz999.png"
-width="30">
-<span id="xyzBalance">
-100 XYZ
-</span>
-</div>
-
-<div
-style="
-background:rgba(0,0,0,0.6);
-padding:8px;
-border-radius:10px;
-">
-<img
-src="images/favicon.png"
-width="30">
-<span id="aympBalance">
-0 AYMP
-</span>
-</div>
-
+            <div style="background:rgba(0,0,0,0.6); padding:8px; border-radius:10px; display: flex; align-items: center; gap: 5px;">
+                <img src="images/favicon.png" width="30" alt="AYMP">
+                <span id="aympBalance">0 AYMP</span>
+            </div>
         </div>
+
         <h1 id="title">Loading...</h1>
         <p id="subtitle">Please wait</p>
-        <div id="zodiacPanel" style="display:none; text-align:center;">
-
-<select id="zodiacSelect">
-<option value="">Choose Zodiac</option>
-<option>Aries</option>
-<option>Taurus</option>
-<option>Gemini</option>
-<option>Cancer</option>
-<option>Leo</option>
-<option>Virgo</option>
-<option>Libra</option>
-<option>Scorpio</option>
-<option>Sagittarius</option>
-<option>Capricorn</option>
-<option>Aquarius</option>
-<option>Pisces</option>
-</select>
-
-<br><br>
-
-<input
-id="playerName"
-type="text"
-placeholder="Enter Your Name"
-style="padding:10px;border-radius:8px;border:none;"
->
-
-<br><br>
-
-<button id="destinyBtn">
-Reveal Destiny
-</button>
-
-<p id="destinyResult"></p>
-            
-<img
-id="powerArtImage"
-src=""
-style="
-display:none;
-width:180px;
-margin-top:15px;
-border-radius:12px;
-">
-
+        
+        <div id="zodiacPanel" style="display:none; text-align:center; background: rgba(0,0,0,0.7); padding: 20px; border-radius: 12px; border: 1px solid #f0a500; margin-bottom: 15px;">
+            <select id="zodiacSelect" style="padding: 10px; border-radius: 8px; font-size: 14px;">
+                <option value="">Choose Zodiac</option>
+                <option>Aries</option>
+                <option>Taurus</option>
+                <option>Gemini</option>
+                <option>Cancer</option>
+                <option>Leo</option>
+                <option>Virgo</option>
+                <option>Libra</option>
+                <option>Scorpio</option>
+                <option>Sagittarius</option>
+                <option>Capricorn</option>
+                <option>Aquarius</option>
+                <option>Pisces</option>
+            </select>
+            <br><br>
+            <input id="playerName" type="text" placeholder="Enter Your Name" style="padding:10px; border-radius:8px; border:none; font-size: 14px;">
+            <br><br>
+            <button id="destinyBtn" style="padding: 10px 20px; background: #f0a500; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Reveal Destiny</button>
+            <p id="destinyResult" style="margin-top: 10px; font-weight: bold;"></p>
+            <img id="powerArtImage" src="" style="display:none; width:180px; margin:15px auto 0 auto; border-radius:12px;">
         </div>
+
         <button id="nextBtn">Next</button>
     </div>
 
-    <script src="script.js"></script>
     <button id="emblemBtn" style="
-    position: fixed; 
-    bottom: 20px; 
-    right: 20px; 
-    width: 80px; 
-    height: 80px; 
-    border-radius: 50%; 
-    border: 3px solid #f0a500; 
-    background: url('favicon.png') no-repeat center;
-    background-size: cover;
-    box-shadow: 0 0 15px rgba(240, 165, 0, 0.9); 
-    z-index: 99999; 
-    cursor: pointer;
-    padding: 0;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: none;
-"></button>
-
-<div id="infoModal" style="
-    display: none; 
-    position: fixed; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    width: 80%; 
-    max-width: 500px; 
-    background: rgba(0, 0, 0, 0.95); 
-    color: white; 
-    border: 2px solid #f0a500; 
-    border-radius: 10px; 
-    padding: 20px; 
-    box-shadow: 0 0 25px rgba(0,0,0,0.8); 
-    z-index: 100000; 
-    text-align: left;
-    font-family: sans-serif;
-">
-    <h2 style="color: #f0a500; margin-top: 0; text-align: center; border-bottom: 1px solid #333; padding-bottom: 10px;">AYMP Realm Info</h2>
-    
-    <div style="max-height: 250px; overflow-y: auto; margin-bottom: 15px; font-size: 14px; line-height: 1.6;">
-        <h3 style="color: #007bff; margin: 10px 0 5px 0;">🎮 Game Details:</h3>
-        <p style="margin: 0 0 10px 0;">Welcome to AYMP Cosmic Kingdom. Journey through the 12 Zodiac signs, unlock ancient wisdom, and discover your true destiny in the stars.</p>
-        
-        <h3 style="color: #007bff; margin: 10px 0 5px 0;">🪙 Token Details (999xyz999):</h3>
-        <p style="margin: 0;">• Token Name: 999xyz999<br>
-        • Network: Binance Smart Chain (BSC)<br>
-        • Platform: Liquidity Pool successfully initialized.<br>
-        • Conversion: 2000 = 999xyz999 KU 4AYMP</p>
-    </div>
-    
-    <button id="closeInfoBtn" style="
-        display: block; 
-        width: 100%; 
-        padding: 10px; 
-        background: #f0a500; 
-        color: black; 
-        border: none; 
-        border-radius: 5px; 
-        font-weight: bold; 
+        position: fixed; 
+        bottom: 20px; 
+        right: 20px; 
+        width: 80px; 
+        height: 80px; 
+        border-radius: 50%; 
+        border: 3px solid #f0a500; 
+        background: #000; 
+        box-shadow: 0 0 15px rgba(240, 165, 0, 0.9); 
+        z-index: 99999; 
         cursor: pointer;
-    ">Close Window</button>
-</div>
+        padding: 0;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: none;
+    ">
+        <img src="images/favicon.png" alt="AYMP Emblem" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+    </button>
+
+    <div id="infoModal" style="
+        display: none; 
+        position: fixed; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+        width: 80%; 
+        max-width: 500px; 
+        background: rgba(0, 0, 0, 0.95); 
+        color: white; 
+        border: 2px solid #f0a500; 
+        border-radius: 10px; 
+        padding: 20px; 
+        box-shadow: 0 0 25px rgba(0,0,0,0.8); 
+        z-index: 100000; 
+        text-align: left;
+        font-family: sans-serif;
+    ">
+        <h2 style="color: #f0a500; margin-top: 0; text-align: center; border-bottom: 1px solid #333; padding-bottom: 10px;">AYMP Realm Info</h2>
+        
+        <div style="max-height: 250px; overflow-y: auto; margin-bottom: 15px; font-size: 14px; line-height: 1.6;">
+            <h3 style="color: #007bff; margin: 10px 0 5px 0;">🎮 Game Details:</h3>
+            <p style="margin: 0 0 10px 0;">Welcome to AYMP Cosmic Kingdom. Journey through the 12 Zodiac signs, unlock ancient wisdom, and discover your true destiny in the stars.</p>
+            
+            <h3 style="color: #007bff; margin: 10px 0 5px 0;">🪙 Token Details (999xyz999):</h3>
+            <p style="margin: 0;">• Token Name: 999xyz999<br>
+            • Network: Binance Smart Chain (BSC)<br>
+            • Platform: Liquidity Pool successfully initialized.<br>
+            • Conversion: 2000 = 999xyz999 KU 4AYMP</p>
+        </div>
+        
+        <button id="closeInfoBtn" style="
+            display: block; 
+            width: 100%; 
+            padding: 10px; 
+            background: #f0a500; 
+            color: black; 
+            border: none; 
+            border-radius: 5px; 
+            font-weight: bold; 
+            cursor: pointer;
+        ">Close Window</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
-    
 </html>
