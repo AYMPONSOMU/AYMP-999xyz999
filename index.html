@@ -1,396 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AYMP Cosmic Kingdom</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #000;
-            font-family: sans-serif;
-        }
-        #scene {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            padding-bottom: 40px;
-            box-sizing: border-box;
-        }
-        #title { font-size: 24px; margin: 5px 0; }
-        #subtitle { font-size: 16px; margin: 5px 0 15px 0; color: #ccc; }
-        
-        /* பட்டன்களுக்கான ஸ்டைல் குரூப் */
-        .btn-container {
-            display: flex;
-            gap: 15px;
-            z-index: 1000;
-        }
-        .nav-btn {
-            padding: 10px 25px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            color: white;
-        }
-        #nextBtn { background: #007bff; }
-        #backBtn { background: #6c757d; display: none; } /* ஆரம்பத்தில் மறைக்கப்பட்டிருக்கும் */
-        
-        #cornerLogo{
-            position:fixed; right:15px; bottom:15px; width:90px; height:auto; z-index:10000; opacity:0.95;
-            animation: floatLogo 3s ease-in-out infinite, glow 2s ease-in-out infinite;
-        }
-        @keyframes floatLogo{ 0%{ transform:translateY(0px); } 50%{ transform:translateY(-8px); } 100%{ transform:translateY(0px); } }
-        @keyframes glow{ 0%{ filter:drop-shadow(0 0 5px gold); } 50%{ filter:drop-shadow(0 0 20px gold); } 100%{ filter:drop-shadow(0 0 5px gold); } }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AYMP Cosmic Kingdom</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            font-family: sans-serif;
+        }
+        #scene {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            padding-bottom: 40px;
+            box-sizing: border-box;
+        }
+        #title { font-size: 24px; margin: 5px 0; }
+        #subtitle { font-size: 16px; margin: 5px 0 15px 0; color: #ccc; }
+        
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+        .nav-btn {
+            padding: 10px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            color: white;
+        }
+        #nextBtn { background: #007bff; }
+        #backBtn { background: #6c757d; display: none; }
+        
+        #cornerLogo{
+            position:fixed; right:15px; bottom:15px; width:90px; height:auto; z-index:10000; opacity:0.95;
+            animation: floatLogo 3s ease-in-out infinite, glow 2s ease-in-out infinite;
+        }
+        @keyframes floatLogo{ 0%{ transform:translateY(0px); } 50%{ transform:translateY(-8px); } 100%{ transform:translateY(0px); } }
+        @keyframes glow{ 0%{ filter:drop-shadow(0 0 5px gold); } 50%{ filter:drop-shadow(0 0 20px gold); } 100%{ filter:drop-shadow(0 0 5px gold); } }
 
-        .modal-content::-webkit-scrollbar { width: 6px; }
-        .modal-content::-webkit-scrollbar-thumb { background-color: #f0a500; border-radius: 4px; }
-        
-        #langSelect {
-            background: #222; color: #fff; border: 1px solid #f0a500; padding: 6px; border-radius: 6px; outline: none; cursor: pointer; margin-right: 35px;
-        }
+        .modal-content::-webkit-scrollbar { width: 6px; }
+        .modal-content::-webkit-scrollbar-thumb { background-color: #f0a500; border-radius: 4px; }
+        
+        #langSelect {
+            background: #222; color: #fff; border: 1px solid #f0a500; padding: 6px; border-radius: 6px; outline: none; cursor: pointer; margin-right: 35px;
+        }
 
-        .close-x-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #f0a500;
-            background: none;
-            border: none;
-            cursor: pointer;
-            line-height: 1;
-            padding: 0;
-            z-index: 100002;
-        }
-        .close-x-btn:hover { color: #fff; }
-    </style>
+        .close-x-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #f0a500;
+            background: none;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            z-index: 100002;
+        }
+        .close-x-btn:hover { color: #fff; }
+    </style>
 </head>
 <body>
 
-    <div id="startScreen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:black; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
-        <h1 style="color:white; margin-bottom:20px;">AYMP Cosmic Kingdom</h1>
-        <button id="entryBtn" style="padding:15px 30px; font-size:18px; cursor:pointer; background:#f0a500; border:none; border-radius:5px; font-weight:bold; color:black;">Enter Realm</button>
-        <div style="margin-top:20px; padding:12px; background:rgba(255,215,0,0.15); border:1px solid gold; border-radius:10px; color:white; text-align:center; max-width:280px; font-size:14px;">
-            👑 Touch the AYMP Emblem to view Game Guide, Tokenomics, Rewards, and Global Roadmap.
-        </div>
-        <img id="cornerLogo" src="images/favicon.png" alt="AYMP Logo">
-    </div>
+    <div id="startScreen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:black; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
+        <h1 style="color:white; margin-bottom:20px;">AYMP Cosmic Kingdom</h1>
+        <button id="entryBtn" style="padding:15px 30px; font-size:18px; cursor:pointer; background:#f0a500; border:none; border-radius:5px; font-weight:bold; color:black;">Enter Realm</button>
+        <div style="margin-top:20px; padding:12px; background:rgba(255,215,0,0.15); border:1px solid gold; border-radius:10px; color:white; text-align:center; max-width:280px; font-size:14px;">
+            👑 Touch the AYMP Emblem to view Game Guide, Tokenomics, Rewards, and Global Roadmap.
+        </div>
+        <img id="cornerLogo" src="images/favicon.png" alt="AYMP Logo">
+    </div>
 
-    <div id="scene">
-        <div id="tokenBar" style="position:absolute; top:10px; left:10px; right:10px; display:flex; justify-content:space-between; align-items:center; z-index:1000;">
-            <div style="background:rgba(0,0,0,0.6); padding:8px; border-radius:10px;">
-                <img src="images/999xyz999.png" width="30" alt="XYZ">
-                <span id="xyzBalance">100 XYZ</span>
-            </div>
-            <div style="background:rgba(0,0,0,0.6); padding:8px; border-radius:10px;">
-                <img src="images/favicon.png" width="30" alt="AYMP">
-                <span id="aympBalance">0 AYMP</span>
-            </div>
-        </div>
-        
-        <h1 id="title">Loading...</h1>
-        <p id="subtitle">Please wait</p>
-        
-        <div id="zodiacPanel" style="display:none; text-align:center;">
-            <select id="zodiacSelect">
-                <option value="">Choose Zodiac</option>
-                <option>Aries</option><option>Taurus</option><option>Gemini</option><option>Cancer</option>
-                <option>Leo</option><option>Virgo</option><option>Libra</option><option>Scorpio</option>
-                <option>Sagittarius</option><option>Capricorn</option><option>Aquarius</option><option>Pisces</option>
-            </select>
-            <br><br>
-            <input id="playerName" type="text" placeholder="Enter Your Name" style="padding:10px;border-radius:8px;border:none;">
-            <br><br>
-            <button id="destinyBtn">Reveal Destiny</button>
-            <p id="destinyResult"></p>
-            <img id="powerArtImage" src="" style="display:none; width:180px; margin-top:15px; border-radius:12px;">
-        </div>
+    <div id="scene">
+        <div id="tokenBar" style="position:absolute; top:10px; left:10px; right:10px; display:flex; justify-content:space-between; align-items:center; z-index:1000;">
+            <div style="background:rgba(0,0,0,0.6); padding:8px; border-radius:10px;">
+                <img src="images/999xyz999.png" width="30" alt="XYZ">
+                <span id="xyzBalance">100 XYZ</span>
+            </div>
+            <div style="background:rgba(0,0,0,0.6); padding:8px; border-radius:10px;">
+                <img src="images/favicon.png" width="30" alt="AYMP">
+                <span id="aympBalance">0 AYMP</span>
+            </div>
+        </div>
+        
+        <h1 id="title">Loading...</h1>
+        <p id="subtitle">Please wait</p>
+        
+        <div id="zodiacPanel" style="display:none; text-align:center;">
+            <select id="zodiacSelect">
+                <option value="">Choose Zodiac</option>
+                <option>Aries</option><option>Taurus</option><option>Gemini</option><option>Cancer</option>
+                <option>Leo</option><option>Virgo</option><option>Libra</option><option>Scorpio</option>
+                <option>Sagittarius</option><option>Capricorn</option><option>Aquarius</option><option>Pisces</option>
+            </select>
+            <br><br>
+            <input id="playerName" type="text" placeholder="Enter Your Name" style="padding:10px;border-radius:8px;border:none;">
+            <br><br>
+            <button id="destinyBtn">Reveal Destiny</button>
+            <p id="destinyResult"></p>
+            <img id="powerArtImage" src="" style="display:none; width:180px; margin-top:15px; border-radius:12px;">
+        </div>
 
-        <div class="btn-container">
-            <button id="backBtn" class="nav-btn">Back</button>
-            <button id="nextBtn" class="nav-btn">Next</button>
-        </div>
-    </div>
+        <div class="btn-container">
+            <button id="backBtn" class="nav-btn">Back</button>
+            <button id="nextBtn" class="nav-btn">Next</button>
+        </div>
+    </div>
 
-    <button id="emblemBtn" onclick="document.getElementById('infoModal').style.display='block';" style="
-        position: fixed; bottom: 20px; right: 20px; width: 80px; height: 80px; border-radius: 50%; 
-        border: 3px solid #f0a500; background: #000; box-shadow: 0 0 15px rgba(240, 165, 0, 0.9); 
-        z-index: 99999; cursor: pointer; padding: 0; display: flex; justify-content: center; align-items: center;
-    ">
-        <img src="images/favicon.png" alt="AYMP Emblem" style="width: 100%; height: 100%; object-fit: cover;">
-    </button>
+    <button id="emblemBtn" onclick="document.getElementById('infoModal').style.display='block';" style="
+        position: fixed; bottom: 20px; right: 20px; width: 80px; height: 80px; border-radius: 50%; 
+        border: 3px solid #f0a500; background: #000; box-shadow: 0 0 15px rgba(240, 165, 0, 0.9); 
+        z-index: 99999; cursor: pointer; padding: 0; display: flex; justify-content: center; align-items: center;
+    ">
+        <img src="images/favicon.png" alt="AYMP Emblem" style="width: 100%; height: 100%; object-fit: cover;">
+    </button>
 
-    <div id="infoModal" style="
-        display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-        width: 85%; max-width: 580px; background: rgba(10, 10, 10, 0.98); color: white; 
-        border: 2px solid #f0a500; border-radius: 12px; padding: 22px; box-shadow: 0 0 30px rgba(240, 165, 0, 0.5); 
-        z-index: 100000; text-align: left; box-sizing: border-box;
-    ">
-        
-        <button class="close-x-btn" onclick="document.getElementById('infoModal').style.display='none';">✕</button>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">
-            <h2 id="modalMainTitle" style="color: #f0a500; margin: 0; font-size: 18px; letter-spacing: 1px;">🪐 AYMP WHITEPAPER</h2>
-            
-            <select id="langSelect" onchange="changeLanguage(this.value)">
-                <option value="en">English</option>
-                <option value="ta">தமிழ்</option>
-                <option value="hi">हिन्दी (Hindi)</option>
-                <option value="zh">中文 (Chinese)</option>
-                <option value="ja">日本語 (Japanese)</option>
-                <option value="es">Español (Spanish)</option>
-                <option value="ar">العربية (Arabic)</option>
-            </select>
-        </div>
-        
-        <div class="modal-content" style="max-height: 280px; overflow-y: auto; font-size: 14px; line-height: 1.6; padding-right: 5px;">
-            
-            <h3 id="sec1Title" style="color: #007bff; margin: 10px 0 5px 0;">🎯 Core Purpose & Vision</h3>
-            <p id="sec1Text" style="margin: 0 0 15px 0; color: #e0e0e0; text-align: justify;">
-                AYMP Cosmic Kingdom bridges the sacred, ancient science of Vedic Astrology with modern Web3 technologies. The ultimate purpose of this platform is to empower global users to discover their unique energetic blueprint, receive precise cosmic guidance, and systematically elevate both their spiritual consciousness and financial well-being.
-            </p>
-            
-            <h3 id="sec2Title" style="color: #007bff; margin: 15px 0 5px 0;">🎮 How to Play & Platform Mechanics</h3>
-            <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px solid #333; margin-bottom: 15px;">
-                <ul id="sec2List" style="margin: 0; padding-left: 20px; color: #ccc;">
-                    <li style="margin-bottom: 8px;"><strong>Cosmic Gateway:</strong> Connect your wallet to establish your identity.</li>
-                    <li style="margin-bottom: 8px;"><strong>Destiny Alignment:</strong> Input your custom profile and select your Zodiac Sign.</li>
-                    <li style="margin-bottom: 8px;"><strong>Yantra Manifestation:</strong> System generates powerful targeted geometric spiritual art and Yantras.</li>
-                </ul>
-            </div>
+    <div id="infoModal" style="
+        display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+        width: 85%; max-width: 580px; background: rgba(10, 10, 10, 0.98); color: white; 
+        border: 2px solid #f0a500; border-radius: 12px; padding: 22px; box-shadow: 0 0 30px rgba(240, 165, 0, 0.5); 
+        z-index: 100000; text-align: left; box-sizing: border-box;
+    ">
+        <button class="close-x-btn" onclick="document.getElementById('infoModal').style.display='none';">✕</button>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">
+            <h2 id="modalMainTitle" style="color: #f0a500; margin: 0; font-size: 18px; letter-spacing: 1px;">🪐 AYMP WHITEPAPER</h2>
+            
+            <select id="langSelect" onchange="changeLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="ta">தமிழ்</option>
+                <option value="hi">हिन्दी (Hindi)</option>
+                <option value="zh">中文 (Chinese)</option>
+                <option value="ja">日本語 (Japanese)</option>
+                <option value="es">Español (Spanish)</option>
+                <option value="ar">العربية (Arabic)</option>
+            </select>
+        </div>
+        
+        <div class="modal-content" style="max-height: 280px; overflow-y: auto; font-size: 14px; line-height: 1.6; padding-right: 5px;">
+            <h3 id="sec1Title" style="color: #007bff; margin: 10px 0 5px 0;">🎯 Core Purpose & Vision</h3>
+            <p id="sec1Text" style="margin: 0 0 15px 0; color: #e0e0e0; text-align: justify;">
+                AYMP Cosmic Kingdom bridges the sacred, ancient science of Vedic Astrology with modern Web3 technologies. The ultimate purpose of this platform is to empower global users to discover their unique energetic blueprint, receive precise cosmic guidance, and systematically elevate both their spiritual consciousness and financial well-being.
+            </p>
+            
+            <h3 id="sec2Title" style="color: #007bff; margin: 15px 0 5px 0;">🎮 How to Play & Platform Mechanics</h3>
+            <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px solid #333; margin-bottom: 15px;">
+                <ul id="sec2List" style="margin: 0; padding-left: 20px; color: #ccc;">
+                    <li style="margin-bottom: 8px;"><strong>Cosmic Gateway:</strong> Connect your wallet to establish your identity.</li>
+                    <li style="margin-bottom: 8px;"><strong>Destiny Alignment:</strong> Input your custom profile and select your Zodiac Sign.</li>
+                    <li style="margin-bottom: 8px;"><strong>Yantra Manifestation:</strong> System generates powerful targeted geometric spiritual art and Yantras.</li>
+                </ul>
+            </div>
 
-            <h3 id="sec3Title" style="color: #007bff; margin: 15px 0 5px 0;">🪙 The Dual-Token Economic Model</h3>
-            <p id="sec3Text" style="margin: 0 0 10px 0; color: #e0e0e0;">
-                To cultivate continuous trading volume and network health, we deploy a robust, sustainable two-token system: 1. 999xyz999 Token (Utility) and 2. AYMP Token (Store of value backed by liquidity pools).
-            </p>
+            <h3 id="sec3Title" style="color: #007bff; margin: 15px 0 5px 0;">🪙 The Dual-Token Economic Model</h3>
+            <p id="sec3Text" style="margin: 0 0 10px 0; color: #e0e0e0;">
+                To cultivate continuous trading volume and network health, we deploy a robust, sustainable two-token system: 1. 999xyz999 Token (Utility) and 2. AYMP Token (Store of value backed by liquidity pools).
+            </p>
 
-            <h3 id="sec4Title" style="color: #f0a500; margin: 15px 0 5px 0;">📋 Smart Contract Addresses (BSC Network)</h3>
-            <div style="background: #111; padding: 12px; border-radius: 8px; font-family: monospace; font-size: 12px; margin-bottom: 15px; border: 1px solid #333; line-height: 1.5;">
-                <span style="color: #f0a500; font-weight: bold;">⭐ AYMP Token:</span><br>
-                <span style="color: #00ffcc; word-break: break-all;">0x6D85F3435EA87459AFC269E215Fa262AbD6C4EA1</span><br><br>
-                <span style="color: #f0a500; font-weight: bold;">⭐ 999xyz999 Token:</span><br>
-                <span style="color: #00ffcc; word-break: break-all;">0xDF09Ebe8FC19C7345918f921c9C3dEda545c4AA7</span>
-            </div>
+            <h3 id="sec4Title" style="color: #f0a500; margin: 15px 0 5px 0;">📋 Smart Contract Addresses (BSC Network)</h3>
+            <div style="background: #111; padding: 12px; border-radius: 8px; font-family: monospace; font-size: 12px; margin-bottom: 15px; border: 1px solid #333; line-height: 1.5;">
+                <span style="color: #f0a500; font-weight: bold;">⭐ AYMP Token:</span><br>
+                <span style="color: #00ffcc; word-break: break-all;">0x6D85F3435EA87459AFC269E215Fa262AbD6C4EA1</span><br><br>
+                <span style="color: #f0a500; font-weight: bold;">⭐ 999xyz999 Token:</span><br>
+                <span style="color: #00ffcc; word-break: break-all;">0xDF09Ebe8FC19C7345918f921c9C3dEda545c4AA7</span>
+            </div>
 
-            <h3 id="sec5Title" style="color: #f0a500; margin: 15px 0 5px 0;">🚀 Extended Multi-Year Roadmap</h3>
-            <div id="roadmapText" style="border-left: 2px solid #007bff; padding-left: 15px; margin-left: 5px; color: #ccc; font-size: 13px; line-height: 1.7;">
-                <p><strong>Phase 1: Genesis Base</strong> – Framework deployment. (Completed) ✅</p>
-                <p><strong>Phase 2: Global Expansion</strong> – Wallet pairing activation. 🌐</p>
-                <p><strong>Phase 3: Cosmic Financials</strong> – Launching staking pools. 🪐</p>
-                <p><strong>Phase 4: Sovereign Dominion</strong> – Autonomous consulting mechanics. 👑</p>
-            </div>
-
-        </div>
-    </div>
-
-  <script>
-        const scenes = [
-          { img: "images/bg_title_metamask.png", title: "Wallet Gateway", text: "Connect Your Cosmic Identity" },
-          { img: "images/bg_cosmic_lobby.png", title: "AYMP Cosmic Kingdom", text: "The Journey Begins..." },
-          { img: "images/bg_zodiac_gateway.png", title: "Choose Zodiac", text: "Select Your Destiny" },
-          { img: "images/bg_aries_reveal.png", title: "Destiny Revealed", text: "Your Journey Starts" },
-          { img: "images/bg_astro_consultation.png", title: "Astro Consultation", text: "Unlock Ancient Wisdom" },
-          { img: "images/bg_zodiac_arena.png", title: "Zodiac Arena", text: "Prove Your Power" },
-          { img: "images/bg_token_swap.png", title: "Token Realm", text: "XYZ → AYMP Path" }
-        ];
-
-        let current = 0;
-
-        const scene = document.getElementById("scene");
-        const title = document.getElementById("title");
-        const subtitle = document.getElementById("subtitle");
-        const zodiacPanel = document.getElementById("zodiacPanel");
-        const destinyBtn = document.getElementById("destinyBtn");
-        const destinyResult = document.getElementById("destinyResult");
-        const powerArtImage = document.getElementById("powerArtImage");
-        const backBtn = document.getElementById("backBtn");
-        const nextBtn = document.getElementById("nextBtn");
-
-        function enableLandscapeFullscreen() {
-            let element = document.documentElement;
-            if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
-                if (element.requestFullscreen) { element.requestFullscreen(); }
-                else if (element.webkitRequestFullscreen) { element.webkitRequestFullscreen(); }
-            }
-            if (screen.orientation && screen.orientation.lock) {
-                screen.orientation.lock('landscape').catch(err => console.log(err));
-            }
-        }
-
-        function checkZodiacScene() {
-            if (scenes[current].title === "Choose Zodiac") {
-                if (zodiacPanel) zodiacPanel.style.display = "block";
-            } else {
-                if (zodiacPanel) zodiacPanel.style.display = "none";
-            }
-        }
-
-        function loadScene() {
-            if (scene) scene.style.backgroundImage = `url('${scenes[current].img}')`;
-            if (title) title.innerText = scenes[current].title;
-            if (subtitle) subtitle.innerText = scenes[current].text;
-            
-            // முதல் சீனில் இருந்தால் Back பட்டனை மறை, இல்லையென்றால் காட்டு
-            if (current === 0) {
-                backBtn.style.display = "none";
-            } else {
-                backBtn.style.display = "block";
-            }
-            
-            checkZodiacScene();
-        }
-
-        // முதல் முறை லோடு செய்தல்
-        loadScene();
-
-        // நெக்ஸ்ட் பட்டன் கிளிக்கும் போது
-        nextBtn.addEventListener("click", () => {
-            current++;
-            if (current >= scenes.length) current = 0;
-            loadScene();
-        });
-
-        // பேக் பட்டன் கிளிக்கும் போது (புதிய வசதி)
-        backBtn.addEventListener("click", () => {
-            current--;
-            if (current < 0) current = scenes.length - 1;
-            loadScene();
-        });
-
-        document.getElementById("entryBtn").addEventListener("click", () => {
-            enableLandscapeFullscreen();
-            document.getElementById("startScreen").style.display = "none";
-        });
-
-        if (destinyBtn) {
-            destinyBtn.addEventListener("click", () => {
-                const zodiac = document.getElementById("zodiacSelect").value;
-                const name = document.getElementById("playerName").value;
-                if (!zodiac || !name) {
-                    destinyResult.innerHTML = "Choose Zodiac and Enter Name";
-                    return;
-                }
-                let destiny = "Cosmic Path"; let image = "images/yantra.png";
-                destinyResult.innerHTML = `${name}<br>${zodiac}<br>${destiny}`;
-                if (powerArtImage) { powerArtImage.src = image; powerArtImage.style.display = "block"; }
-            });
-        }
-
-        // பலமொழி தரவுகள் லாஜிக்
-        const localTranslations = {
-            en: {
-                mainTitle: "🪐 AYMP WHITEPAPER",
-                sec1Title: "🎯 Core Purpose & Vision",
-                sec1Text: "AYMP Cosmic Kingdom bridges the sacred, ancient science of Vedic Astrology with modern Web3 technologies. The ultimate purpose of this platform is to empower global users to discover their unique energetic blueprint, receive precise cosmic guidance, and systematically elevate both their spiritual consciousness and financial well-being.",
-                sec2Title: "🎮 How to Play & Platform Mechanics",
-                sec2List: "<li style='margin-bottom:8px;'><strong>Cosmic Gateway:</strong> Connect your wallet to establish your identity.</li><li style='margin-bottom:8px;'><strong>Destiny Alignment:</strong> Input your custom profile and select your Zodiac Sign.</li><li style='margin-bottom:8px;'><strong>Yantra Manifestation:</strong> System generates powerful targeted geometric spiritual art and Yantras.</li>",
-                sec3Title: "🪙 The Dual-Token Economic Model",
-                sec3Text: "To cultivate continuous trading volume and network health, we deploy a robust, sustainable two-token system: 1. 999xyz999 Token (Utility) and 2. AYMP Token (Store of value backed by liquidity pools).",
-                sec4Title: "📋 Smart Contract Addresses (BSC Network)",
-                sec5Title: "🚀 Extended Multi-Year Roadmap",
-                roadmap: "<p><strong>Phase 1: Genesis Base</strong> – Framework deployment. (Completed) ✅</p><p><strong>Phase 2: Global Expansion</strong> – Wallet pairing activation. 🌐</p><p><strong>Phase 3: Cosmic Financials</strong> – Launching staking pools. 🪐</p><p><strong>Phase 4: Sovereign Dominion</strong> – Autonomous consulting mechanics. 👑</p>"
-            },
-            ta: {
-                mainTitle: "🪐 AYMP ஒயிட்பேப்பர்",
-                sec1Title: "🎯 முதன்மை நோக்கம் மற்றும் பார்வை",
-                sec1Text: "AYMP காஸ்மிக் கிங்டம் என்பது பழமையான வேத ஜோதிட அறிவியலையும் நவீன Web3 தொழில்நுட்பங்களையும் இணைக்கும் ஒரு தளமாகும். உலகளாவிய பயனர்கள் தங்களின் தனித்துவமான ஆற்றலை அறிந்து, துல்லியமான பிரபஞ்ச வழிகாட்டுதலைப் பெற்று, ஆன்மீக விழிப்புணர்வையும் நிதி நிலமையையும் ஒரே நேரத்தில் உயர்த்துவதே இதன் இறுதி நோக்கமாகும்.",
-                sec2Title: "🎮 விளையாடுவது எப்படி? (Platform Mechanics)",
-                sec2List: "<li style='margin-bottom:8px;'><strong>பிரபஞ்ச நுழைவாயில்:</strong> உங்கள் பாதுகாப்பான அடையாளத்தை உருவாக்க மெட்டாமஸ்க் வாலட்டை இணைக்கவும்.</li><li style='margin-bottom:8px;'><strong>விதிப்பயன் கணக்கீடு:</strong> உங்கள் பெயரை உள்ளிட்டு ராசியைத் தேர்வு செய்யவும். சிஸ்டம் உங்கள் கிரக நிலைகளை ஆராயும்.</li><li style='margin-bottom:8px;'><strong>யந்திர வடிவம்:</strong> உங்கள் ராசிக்குரிய தனிப்பயனாக்கப்பட்ட சக்திவாய்ந்த ஆன்மீக வடிவியல் கலைகள் மற்றும் யந்திரங்கள் உங்களுக்காக உருவாக்கப்படும்.</li>",
-                sec3Title: "🪙 இரட்டை டோக்கன் பொருளாதார முறை",
-                sec3Text: "தொடர்ச்சியான வர்த்தகம் மற்றும் நெட்வۆர்க் பாதுகாப்பிற்காக, நாங்கள் இரண்டு டோக்கன் முறையைச் செயல்படுத்தியுள்ளோம்: 1. 999xyz999 டோக்கன் (பயன்பாட்டிற்கு) மற்றும் 2. AYMP டோக்கன் (முதலீடு மற்றும் லிக்விடிட்டி பூல் பாதுகாப்பு கொண்டது).",
-                sec4Title: "📋 ஸ்மார்ட் காண்ட்ராக்ட் முகவரிகள் (BSC Network)",
-                sec5Title: "🚀 விரிவான பல வருட ரோடுமேப் (Roadmap)",
-                roadmap: "<p><strong>கட்டம் 1: தொடக்கம்</strong> – கேம் கட்டமைப்பு உருவாக்கம் மற்றும் டோக்கன் வெளியீடு. (முடிவடைந்தது) ✅</p><p><strong>கட்டம் 2: உலகளாவிய விரிவாக்கம்</strong> – வாலட் இணைப்பு மற்றும் எக்ஸ்சேஞ்ச் வர்த்தகம் தொடங்குதல். 🌐</p><p><strong>கட்டம் 3: ஆன்மீக நிதி</strong> – டோக்கன்களை ஸ்டேக்கிங் (Staking) செய்து லாபம் ஈட்டும் வசதி. 🪐</p><p><strong>கட்டம் 4: முழு ஆதிக்கம்</strong> – பரவலாக்கப்பட்ட தன்னாட்சி ஆலோசனை முறைகளை அறிமுகப்படுத்துதல். 👑</p>"
-            },
-            hi: {
-                mainTitle: "🪐 AYMP व्हाइटपेपर",
-                sec1Title: "🎯 मुख्य उद्देश्य और विजन",
-                sec1Text: "AYMP कॉस्मिक किंगडम वैदिक ज्योतिष के पवित्र, प्राचीन विज्ञान को आधुनिक Web3 तकनीकों के साथ जोड़ता है। इस प्लेटफॉर्म का अंतिम उद्देश्य वैश्विक उपयोगकर्ताओं को उनकी अद्वितीय ऊर्जा ब्लूप्रिंट की खोज करने, सटीक ब्रह्मांडीय मार्गदर्शन प्राप्त करने और व्यवस्थित रूप से उनकी आध्यात्मिक चेतना और वित्तीय कल्याण दोनों को ऊपर उठाने के लिए सशक्त बनाना है।",
-                sec2Title: "🎮 कैसे खेलें और प्लेटफॉर्म मैकेनिक्स",
-                sec2List: "<li style='margin-bottom:8px;'><strong>कॉस्मिक गेटवे:</strong> अपनी पहचान स्थापित करने के लिए अपने वॉलेट को कनेक्ट करें।</li><li style='margin-bottom:8px;'><strong>भाग्य संरेखण:</strong> अपनी प्रोफाइल दर्ज करें और अपनी राशि चुनें।</li><li style='margin-bottom:8px;'><strong>यंत्र प्रकटीकरण:</strong> सिस्टम आपके व्यक्तिगत उपाय और उन्नति के लिए शक्तिशाली ज्यामितीय आध्यात्मिक कला और यंत्र उत्पन्न करता है।</li>",
-                sec3Title: "🪙 डुअल-टोकन इकोनॉमिक配置",
-                sec3Text: "निरंतर ट्रेडिंग वॉल्यूम और नेटवर्क स्वास्थ्य बनाए रखने के लिए, हम एक मजबूत, टिकाऊ दो-टोकन प्रणाली लागू करते हैं: 1. 999xyz999 टोकन (उपयोगिता) और 2. AYMP टोकन (लिक्विडिटी पूल द्वारा समर्थित मूल्य का भंडार)।",
-                sec4Title: "📋 स्मार्ट कॉन्ट्रैक्ट एड्रेस (BSC नेटवर्क)",
-                sec5Title: "🚀 विस्तारित बहु-वर्षीय रोडमैप",
-                roadmap: "<p><strong>चरण 1: जेनेसिस बेस</strong> – गेम फ्रेमवर्क परिनियोजन। (पूर्ण) ✅</p><p><strong>चरण 2: वैश्विक विस्तार</strong> – ऑन-चेन वॉलेट पेयरिंग सक्रियण। 🌐</p><p><strong>चरण 3: कॉस्मिक फाइनेंशियल्स</strong> – स्टेकिंग पूल लॉन्च करना। 🪐</p><p><strong>चरण 4: संप्रभु डोमिनियन</strong> – विकेंद्रीकृत स्वायत्त परामर्श तंत्र का शुभारंभ। 👑</p>"
-            },
-            zh: {
-                mainTitle: "🪐 AYMP 白皮书",
-                sec1Title: "🎯 核心宗旨与愿景",
-                sec1Text: "AYMP Cosmic Kingdom 将神圣、古老的吠陀占星术与现代 Web3 技术相结合。该平台的最终目的是让全球用户能够发现自己独特的能量蓝图，接受精确的宇宙指引，并系统地提升他们的精神意识和财务福祉。",
-                sec2Title: "🎮 玩法与平台机制",
-                sec2List: "<li style='margin-bottom:8px;'><strong>宇宙网关：</strong> 连接您的钱包以确立您的身份。</li><li style='margin-bottom:8px;'><strong>命运对齐：</strong> 输入您的信息并选择您的星座。</li><li style='margin-bottom:8px;'><strong>神圣图腾显现：</strong> 系统自动生成专属于您的几何精神艺术和图腾。</li>",
-                sec3Title: "🪙 双代币经济模型",
-                sec3Text: "为了培养持续的交易量和稳健的网络健康，我们部署了一个强大、可持续的双代币系统：1. 999xyz999 代币和 2. AYMP 代币。",
-                sec4Title: "📋 智能合约地址 (BSC 网络)",
-                sec5Title: "🚀 路线图",
-                roadmap: "<p><strong>阶段 1: 创世基石</strong> – 框架部署。（已完成） ✅</p><p><strong>阶段 2: 全球扩张</strong> – 激活钱包配对。 🌐</p><p><strong>阶段 3: 宇宙金融</strong> – 推出质押池。 🪐</p><p><strong>阶段 4: 主权领地</strong> – 推出自治咨询机制。 👑</p>"
-            },
-            ja: {
-                mainTitle: "🪐 AYMP ホワイトペーパー",
-                sec1Title: "🎯 核心目的とビジョン",
-                sec1Text: "AYMP Cosmic Kingdomは、ヴェーダ占星術の科学と現代のWeb3テクノロジーを融合させます。グローバルユーザーが独自のエネルギーブループリントを発見し、精神的意識と経済的幸福の両方を高めることを目的としています。",
-                sec2Title: "🎮 プレイ方法とシステムメカニクス",
-                sec2List: "<li style='margin-bottom:8px;'><strong>宇宙へのゲートウェイ:</strong> ウォレットを接続してアイデンティティを確立。</li><li style='margin-bottom:8px;'><strong>運命の調整:</strong> 星座を選択します。</li><li style='margin-bottom:8px;'><strong>ヤントラの発現:</strong> 強力な幾何学的精神アートとヤントラが生成されます。</li>",
-                sec3Title: "🪙 デュアルトークン経済モデル",
-                sec3Text: "継続的な取引量を維持するため、1. 999xyz999トークンと2. AYMPトークンの2トークンシステムを採用。",
-                sec4Title: "📋 スマートコントラクトアドレス",
-                sec5Title: "🚀 ロードマップ",
-                roadmap: "<p><strong>フェーズ 1: ジェネシス</strong> – フレームワークの展開。（完了） ✅</p><p><strong>フェーズ 2: グローバル拡大</strong> – ウォレット接続の有効化。 🌐</p><p><strong>フェーズ 3: 宇宙金融</strong> – ステーキングプールの開設。 🪐</p><p><strong>フェーズ 4: 独立主権</strong> – 自律コンサルティングの開始。 👑</p>"
-            },
-            es: {
-                mainTitle: "🪐 AYMP LIBRO BLANCO",
-                sec1Title: "🎯 Propósito Central y Visión",
-                sec1Text: "AYMP Cosmic Kingdom une la astrología védica con Web3. El propósito es empoderar a los usuarios para descubrir su plano energético y elevar su conciencia espiritual y bienestar financiero.",
-                sec2Title: "🎮 Cómo Jugar",
-                sec2List: "<li><strong>Portal Cósmico:</strong> Conecte su billetera.</li><li><strong>Alineación:</strong> Seleccione su signo.</li><li><strong>Yantras:</strong> El sistema genera arte espiritual geométrico.",
-                sec3Title: "🪙 Modelo de Doble Token",
-                sec3Text: "Sistema de dos tokens: 1. Token 999xyz999 (Utilidad) y 2. Token AYMP (Reserva de valor).",
-                sec4Title: "📋 Contratos Inteligentes",
-                sec5Title: "🚀 Hoja de Ruta",
-                roadmap: "<p><strong>Fase 1: Génesis</strong> – Despliegue completado. ✅</p><p><strong>Fase 2: Expansión Global</strong> – Billeteras en cadena. 🌐</p><p><strong>Fase 3: Finanzas Cósmicas</strong> – Staking pools. 🪐</p><p><strong>Fase 4: Dominio Soberano</strong> – Consultoría autónoma. 👑</p>"
-            },
-            ar: {
-                mainTitle: "🪐 AYMP الورقة البيضاء",
-                sec1Title: "🎯 الهدف الأساسي والرؤية",
-                sec1Text: "تجمع مملكة AYMP الكونية بين علم التنجيم الفيدي وتقنيات Web3 لتمكين المستخدمين من رفع وعيهم الروحي ورفاهيتهم المالية.",
-                sec2Title: "🎮 كيفية اللعب",
-                sec2List: "<li><strong>البوابة الكونية:</strong> قم بتوصيل محفظتك.</li><li><strong>محاذاة القدر:</strong> اختر برجك الفلكي.</li><li><strong>تجلي اليانترات:</strong> النظام بإنشاء يانترات مخصصة.",
-                sec3Title: "🪙 النموذج الاقتصادي",
-                sec3Text: "نظام ثنائي العملات: 1. عملة 999xyz999 و 2. عملة AYMP.",
-                sec4Title: "📋 العقود الذكية",
-                sec5Title: "🚀 خارطة الطريق",
-                roadmap: "<p><strong>المرحلة 1: التأسيس</strong> – مكتمل ✅</p><p><strong>المرحلة 2: التوسع العالمي</strong> – المحافظ الرقمية. 🌐</p><p><strong>المرحلة 3: التمويل الكوني</strong> – التخزين اللامركزي. 🪐</p><p><strong>المرحلة 4: السيادة الكاملة</strong> – الاستشارات الذاتية. 👑</p>"
-            }
-        };
-
-        function changeLanguage(lang) {
-            document.getElementById("modalMainTitle").innerHTML = localTranslations[lang].mainTitle;
-            document.getElementById("sec1Title").innerHTML = localTranslations[lang].sec1Title;
-            document.getElementById("sec1Text").innerHTML = localTranslations[lang].sec1Text;
-            document.getElementById("sec2Title").innerHTML = localTranslations[lang].sec2Title;
-            document.getElementById("sec2List").innerHTML = localTranslations[lang].sec2List;
-            document.getElementById("sec3Title").innerHTML = localTranslations[lang].sec3Title;
-            document.getElementById("sec3Text").innerHTML = localTranslations[lang].sec3Text;
-            document.getElementById("sec4Title").innerHTML = localTranslations[lang].sec4Title;
-            document.getElementById("sec5Title").innerHTML = localTranslations[lang].sec5Title;
-            document.getElementById("roadmapText").innerHTML = localTranslations[lang].roadmap;
-        }
-    </script>
+            <h3 id="sec5Title" style="color: #f0a500; margin: 15px 0 5px 0;">🚀 Extended Multi-Year Roadmap</h3>
+            <div id="roadmapText" style="border-left: 2px solid #007bff; padding-left: 15px; margin-left: 5px; color: #ccc; font-size: 13px; line-height: 1.7;">
+                <p><strong>Phase 1: Genesis Base</strong> – Framework deployment. (Completed) ✅</p>
+                <p><strong>Phase 2: Global Expansion</strong> – Wallet pairing activation. 🌐</p>
+                <p><strong>Phase 3: Cosmic Financials</strong> – Launching staking pools. 🪐</p>
+                <p><strong>Phase 4: Sovereign Dominion</strong> – Autonomous consulting mechanics. 👑</p>
+            </div>
+        </div>
+    </div>
 </body>
-                  </html>
+  </html>
+
+                  
