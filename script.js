@@ -197,3 +197,11 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+// கூகுள் மொழிபெயர்ப்பு விட்ஜெட்டைத் தொடங்குவதற்கான ஃபங்ஷன்
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'en', 
+        includedLanguages: 'ta,en,hi,zh-CN,es,fr,de,ar,it,ja,ko,pt', // உங்களுக்குத் தேவையான உலகளாவிய மொழிகள் (தமிழ் உட்பட)
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+}
