@@ -42,9 +42,27 @@
         .modal-content::-webkit-scrollbar { width: 6px; }
         .modal-content::-webkit-scrollbar-thumb { background-color: #f0a500; border-radius: 4px; }
         
-        /* மொழித் தேர்வுப் பெட்டி ஸ்டைல் */
         #langSelect {
-            background: #222; color: #fff; border: 1px solid #f0a500; padding: 6px; border-radius: 6px; outline: none; cursor: pointer;
+            background: #222; color: #fff; border: 1px solid #f0a500; padding: 6px; border-radius: 6px; outline: none; cursor: pointer; margin-right: 35px;
+        }
+
+        /* புதிய "X" க்ளோஸ் பட்டன் ஸ்டைல் */
+        .close-x-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #f0a500;
+            background: none;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            z-index: 100002;
+        }
+        .close-x-btn:hover {
+            color: #fff;
         }
     </style>
 </head>
@@ -91,7 +109,7 @@
         <button id="nextBtn">Next</button>
     </div>
 
-    <button id="emblemBtn" style="
+    <button id="emblemBtn" onclick="document.getElementById('infoModal').style.display='block';" style="
         position: fixed; bottom: 20px; right: 20px; width: 80px; height: 80px; border-radius: 50%; 
         border: 3px solid #f0a500; background: #000; box-shadow: 0 0 15px rgba(240, 165, 0, 0.9); 
         z-index: 99999; cursor: pointer; padding: 0; display: flex; justify-content: center; align-items: center;
@@ -103,18 +121,21 @@
         display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
         width: 85%; max-width: 580px; background: rgba(10, 10, 10, 0.98); color: white; 
         border: 2px solid #f0a500; border-radius: 12px; padding: 22px; box-shadow: 0 0 30px rgba(240, 165, 0, 0.5); 
-        z-index: 100000; text-align: left;
+        z-index: 100000; text-align: left; box-sizing: border-box;
     ">
         
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 10px;">
-            <h2 id="modalMainTitle" style="color: #f0a500; margin: 0; font-size: 20px; letter-spacing: 1px;">🪐 AYMP WHITEPAPER</h2>
-            <select id="langSelect">
+        <button class="close-x-btn" onclick="document.getElementById('infoModal').style.display='none';">✕</button>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">
+            <h2 id="modalMainTitle" style="color: #f0a500; margin: 0; font-size: 18px; letter-spacing: 1px;">🪐 AYMP WHITEPAPER</h2>
+            
+            <select id="langSelect" onchange="changeLanguage(this.value)">
                 <option value="en">English</option>
                 <option value="ta">தமிழ்</option>
             </select>
         </div>
         
-        <div class="modal-content" style="max-height: 380px; overflow-y: auto; margin-bottom: 15px; font-size: 14px; line-height: 1.6; padding-right: 5px;">
+        <div class="modal-content" style="max-height: 280px; overflow-y: auto; font-size: 14px; line-height: 1.6; padding-right: 5px;">
             
             <h3 id="sec1Title" style="color: #007bff; margin: 10px 0 5px 0;">🎯 Core Purpose & Vision</h3>
             <p id="sec1Text" style="margin: 0 0 15px 0; color: #e0e0e0; text-align: justify;">
@@ -124,15 +145,15 @@
             <h3 id="sec2Title" style="color: #007bff; margin: 15px 0 5px 0;">🎮 How to Play & Platform Mechanics</h3>
             <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px solid #333; margin-bottom: 15px;">
                 <ul id="sec2List" style="margin: 0; padding-left: 20px; color: #ccc;">
-                    <li style="margin-bottom: 8px;"><strong>Cosmic Gateway:</strong> Connect your non-custodial Web3 wallet (MetaMask or Trust Wallet) to establish your secure identity across the decentralized realm.</li>
-                    <li style="margin-bottom: 8px;"><strong>Destiny Alignment:</strong> Input your custom profile details and select your Zodiac Sign. The algorithmic engine instantly processes your planetary alignment.</li>
-                    <li style="margin-bottom: 8px;"><strong>Yantra Manifestation:</strong> Based on your customized zodiac computation, the platform generates unique, powerful, highly targeted geometric spiritual art and Yantras designed for your personal remedy and elevation.</li>
+                    <li style="margin-bottom: 8px;"><strong>Cosmic Gateway:</strong> Connect your wallet to establish your identity.</li>
+                    <li style="margin-bottom: 8px;"><strong>Destiny Alignment:</strong> Input your custom profile and select your Zodiac Sign.</li>
+                    <li style="margin-bottom: 8px;"><strong>Yantra Manifestation:</strong> System generates powerful targeted geometric spiritual art and Yantras.</li>
                 </ul>
             </div>
 
             <h3 id="sec3Title" style="color: #007bff; margin: 15px 0 5px 0;">🪙 The Dual-Token Economic Model</h3>
             <p id="sec3Text" style="margin: 0 0 10px 0; color: #e0e0e0;">
-                To cultivate continuous trading volume and bulletproof network health, we deploy a robust, sustainable two-token system: 1. 999xyz999 Token (Utility) and 2. AYMP Token (Store of value backed by liquidity pools).
+                To cultivate continuous trading volume and network health, we deploy a robust, sustainable two-token system: 1. 999xyz999 Token (Utility) and 2. AYMP Token (Store of value backed by liquidity pools).
             </p>
 
             <h3 id="sec4Title" style="color: #f0a500; margin: 15px 0 5px 0;">📋 Smart Contract Addresses (BSC Network)</h3>
@@ -145,20 +166,57 @@
 
             <h3 id="sec5Title" style="color: #f0a500; margin: 15px 0 5px 0;">🚀 Extended Multi-Year Roadmap</h3>
             <div id="roadmapText" style="border-left: 2px solid #007bff; padding-left: 15px; margin-left: 5px; color: #ccc; font-size: 13px; line-height: 1.7;">
-                <p><strong>Phase 1: Genesis Base</strong> – Structural game framework deployment and audited token generation. (Completed) ✅</p>
-                <p><strong>Phase 2: Global Expansion</strong> – Activating on-chain wallet pairing and multi-exchange swap channels. 🌐</p>
-                <p><strong>Phase 3: Cosmic Financials</strong> – Launching staking pools and automated high-yield harvesting. 🪐</p>
-                <p><strong>Phase 4: Sovereign Dominion</strong> – Launch of decentralized autonomous consulting mechanics. 👑</p>
+                <p><strong>Phase 1: Genesis Base</strong> – Framework deployment. (Completed) ✅</p>
+                <p><strong>Phase 2: Global Expansion</strong> – Wallet pairing activation. 🌐</p>
+                <p><strong>Phase 3: Cosmic Financials</strong> – Launching staking pools. 🪐</p>
+                <p><strong>Phase 4: Sovereign Dominion</strong> – Autonomous consulting mechanics. 👑</p>
             </div>
 
         </div>
-        
-        <button id="closeInfoBtn" style="
-            display: block; width: 100%; padding: 12px; background: #f0a500; color: black; 
-            border: none; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer;
-        ">Close Window</button>
     </div>
 
     <script src="script.js"></script>
+    
+    <script>
+        const localTranslations = {
+            en: {
+                mainTitle: "🪐 AYMP WHITEPAPER",
+                sec1Title: "🎯 Core Purpose & Vision",
+                sec1Text: "AYMP Cosmic Kingdom bridges the sacred, ancient science of Vedic Astrology with modern Web3 technologies. The ultimate purpose of this platform is to empower global users to discover their unique energetic blueprint, receive precise cosmic guidance, and systematically elevate both their spiritual consciousness and financial well-being.",
+                sec2Title: "🎮 How to Play & Platform Mechanics",
+                sec2List: "<li style='margin-bottom:8px;'><strong>Cosmic Gateway:</strong> Connect your wallet to establish your identity.</li><li style='margin-bottom:8px;'><strong>Destiny Alignment:</strong> Input your custom profile and select your Zodiac Sign.</li><li style='margin-bottom:8px;'><strong>Yantra Manifestation:</strong> System generates powerful targeted geometric spiritual art and Yantras.</li>",
+                sec3Title: "🪙 The Dual-Token Economic Model",
+                sec3Text: "To cultivate continuous trading volume and network health, we deploy a robust, sustainable two-token system: 1. 999xyz999 Token (Utility) and 2. AYMP Token (Store of value backed by liquidity pools).",
+                sec4Title: "📋 Smart Contract Addresses (BSC Network)",
+                sec5Title: "🚀 Extended Multi-Year Roadmap",
+                roadmap: "<p><strong>Phase 1: Genesis Base</strong> – Framework deployment. (Completed) ✅</p><p><strong>Phase 2: Global Expansion</strong> – Wallet pairing activation. 🌐</p><p><strong>Phase 3: Cosmic Financials</strong> – Launching staking pools. 🪐</p><p><strong>Phase 4: Sovereign Dominion</strong> – Autonomous consulting mechanics. 👑</p>"
+            },
+            ta: {
+                mainTitle: "🪐 AYMP ஒயிட்பேப்பர்",
+                sec1Title: "🎯 முதன்மை நோக்கம் மற்றும் பார்வை",
+                sec1Text: "AYMP காஸ்மிக் கிங்டம் என்பது பழமையான வேத ஜோதிட அறிவியலையும் நவீன Web3 தொழில்நுட்பங்களையும் இணைக்கும் ஒரு தளமாகும். உலகளாவிய பயனர்கள் தங்களின் தனித்துவமான ஆற்றலை அறிந்து, துல்லியமான பிரபஞ்ச வழிகாட்டுதலைப் பெற்று, ஆன்மீக விழிப்புணர்வையும் நிதி நிலமையையும் ஒரே நேரத்தில் உயர்த்துவதே இதன் இறுதி நோக்கமாகும்.",
+                sec2Title: "🎮 விளையாடுவது எப்படி? (Platform Mechanics)",
+                sec2List: "<li style='margin-bottom:8px;'><strong>பிரபஞ்ச நுழைவாயில்:</strong> உங்கள் பாதுகாப்பான அடையாளத்தை உருவாக்க மெட்டாமஸ்க் வாலட்டை இணைக்கவும்.</li><li style='margin-bottom:8px;'><strong>விதிப்பயன் கணக்கீடு:</strong> உங்கள் பெயரை உள்ளிட்டு ராசியைத் தேர்வு செய்யவும். சிஸ்டம் உங்கள் கிரக நிலைகளை ஆராயும்.</li><li style='margin-bottom:8px;'><strong>யந்திர வடிவம்:</strong> உங்கள் ராசிக்குரிய தனிப்பயனாக்கப்பட்ட சக்திவாய்ந்த ஆன்மீக வடிவியல் கலைகள் மற்றும் யந்திரங்கள் உங்களுக்காக உருவாக்கப்படும்.</li>",
+                sec3Title: "🪙 இரட்டை டோக்கன் பொருளாதார முறை",
+                sec3Text: "தொடர்ச்சியான வர்த்தகம் மற்றும் நெட்வொர்க் பாதுகாப்பிற்காக, நாங்கள் இரண்டு டோக்கன் முறையைச் செயல்படுத்தியுள்ளோம்: 1. 999xyz999 டோக்கன் (பயன்பாட்டிற்கு) மற்றும் 2. AYMP டோக்கன் (முதலீடு மற்றும் லிக்விடிட்டி பூல் பாதுகாப்பு கொண்டது).",
+                sec4Title: "📋 ஸ்மார்ட் காண்ட்ராக்ட் முகவரிகள் (BSC Network)",
+                sec5Title: "🚀 விரிவான பல வருட ரோடுமேப் (Roadmap)",
+                roadmap: "<p><strong>கட்டம் 1: தொடக்கம்</strong> – கேம் கட்டமைப்பு உருவாக்கம் மற்றும் டோக்கன் வெளியீடு. (முடிவடைந்தது) ✅</p><p><strong>கட்டம் 2: உலகளாவிய விரிவாக்கம்</strong> – வாலட் இணைப்பு மற்றும் எக்ஸ்சேஞ்ச் வர்த்தகம் தொடங்குதல். 🌐</p><p><strong>கட்டம் 3: ஆன்மீக நிதி</strong> – டோக்கன்களை ஸ்டேக்கிங் (Staking) செய்து லாபம் ஈட்டும் வசதி. 🪐</p><p><strong>கட்டம் 4: முழு ஆதிக்கம்</strong> – பரவலாக்கப்பட்ட தன்னாட்சி ஆலோசனை முறைகளை அறிமுகப்படுத்துதல். 👑</p>"
+            }
+        };
+
+        function changeLanguage(lang) {
+            document.getElementById("modalMainTitle").innerHTML = localTranslations[lang].mainTitle;
+            document.getElementById("sec1Title").innerHTML = localTranslations[lang].sec1Title;
+            document.getElementById("sec1Text").innerHTML = localTranslations[lang].sec1Text;
+            document.getElementById("sec2Title").innerHTML = localTranslations[lang].sec2Title;
+            document.getElementById("sec2List").innerHTML = localTranslations[lang].sec2List;
+            document.getElementById("sec3Title").innerHTML = localTranslations[lang].sec3Title;
+            document.getElementById("sec3Text").innerHTML = localTranslations[lang].sec3Text;
+            document.getElementById("sec4Title").innerHTML = localTranslations[lang].sec4Title;
+            document.getElementById("sec5Title").innerHTML = localTranslations[lang].sec5Title;
+            document.getElementById("roadmapText").innerHTML = localTranslations[lang].roadmap;
+        }
+    </script>
 </body>
-                </html>
+</html>
