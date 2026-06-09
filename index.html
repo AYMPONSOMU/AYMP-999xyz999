@@ -72,7 +72,6 @@
             100%{ filter:drop-shadow(0 0 5px gold); }
         }
 
-        /* பாப்-அப் விண்டோவிற்கான பிரத்யேக ஸ்க்ரோல்பார் ஸ்டைல் */
         .modal-content::-webkit-scrollbar {
             width: 6px;
         }
@@ -80,17 +79,35 @@
             background-color: #f0a500;
             border-radius: 4px;
         }
+
+        /* கூகுள் டிரான்ஸ்லேட் லேபிளை மறைக்க சிறிய சிஎஸ்எஸ் */
+        .goog-te-gadget span {
+            display: none !important;
+        }
+        .goog-te-gadget {
+            color: transparent !important;
+            font-size: 0px !important;
+        }
+        .goog-te-combo {
+            background: #222 !important;
+            color: #fff !important;
+            border: 1px solid #f0a500 !important;
+            padding: 6px !important;
+            border-radius: 6px !important;
+            outline: none;
+            cursor: pointer;
+        }
     </style>
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
 
     <div id="startScreen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:black; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
         <h1 style="color:white; margin-bottom:20px;">AYMP Cosmic Kingdom</h1>
         <button id="entryBtn" style="padding:15px 30px; font-size:18px; cursor:pointer; background:#f0a500; border:none; border-radius:5px; font-weight:bold; color:black;">Enter Realm</button>
-        <div style="margin-top:20px; padding:12px; background:rgba(255,215,0,0.15); border:1px solid gold; border-radius:10px; color:white; text-align:center; max-width:280px;">
-            👑 Touch the AYMP Emblem<br>
-            to learn about the game,<br>
-            tokens, rewards and roadmap.
+        <div style="margin-top:20px; padding:12px; background:rgba(255,215,0,0.15); border:1px solid gold; border-radius:10px; color:white; text-align:center; max-width:280px; font-size:14px;">
+            👑 Touch the AYMP Emblem to view Game Guide, Tokenomics, Rewards, and Global Roadmap.
         </div>
         <img id="cornerLogo" src="images/favicon.png" alt="AYMP Logo">
     </div>
@@ -98,12 +115,12 @@
     <div id="scene">
         <div id="tokenBar" style="position:absolute; top:10px; left:10px; right:10px; display:flex; justify-content:space-between; align-items:center; z-index:1000;">
             <div style="background:rgba(0,0,0,0.6); padding:8px; border-radius:10px;">
-                <img src="images/999xyz999.png" width="30">
+                <img src="images/999xyz999.png" width="30" alt="XYZ">
                 <span id="xyzBalance">100 XYZ</span>
             </div>
 
             <div style="background:rgba(0,0,0,0.6); padding:8px; border-radius:10px;">
-                <img src="images/favicon.png" width="30">
+                <img src="images/favicon.png" width="30" alt="AYMP">
                 <span id="aympBalance">0 AYMP</span>
             </div>
         </div>
@@ -170,73 +187,90 @@
         left: 50%; 
         transform: translate(-50%, -50%); 
         width: 85%; 
-        max-width: 550px; 
+        max-width: 580px; 
         background: rgba(10, 10, 10, 0.98); 
         color: white; 
         border: 2px solid #f0a500; 
         border-radius: 12px; 
-        padding: 20px; 
+        padding: 22px; 
         box-shadow: 0 0 30px rgba(240, 165, 0, 0.5); 
         z-index: 100000; 
         text-align: left;
         font-family: sans-serif;
     ">
-        <h2 style="color: #f0a500; margin-top: 0; text-align: center; border-bottom: 1px solid #333; padding-bottom: 10px; font-size: 22px;">🪐 AYMP Cosmic Whitepaper</h2>
         
-        <div class="modal-content" style="max-height: 350px; overflow-y: auto; margin-bottom: 15px; font-size: 14px; line-height: 1.6; padding-right: 5px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 10px;">
+            <h2 style="color: #f0a500; margin: 0; font-size: 20px; letter-spacing: 1px;">🪐 AYMP WHITEPAPER</h2>
+            <div id="google_translate_element"></div>
+        </div>
+        
+        <div class="modal-content" style="max-height: 380px; overflow-y: auto; margin-bottom: 15px; font-size: 14px; line-height: 1.6; padding-right: 5px;">
             
-            <h3 style="color: #007bff; margin: 10px 0 5px 0;">🎮 கேம் நோக்கம் & நன்மைகள்:</h3>
-            <p style="margin: 0 0 15px 0; color: #e0e0e0;">
-                இந்த கேம் ஜோதிடம் (Astrology), ராசிகள் மற்றும் நவகிரகங்களின் சூட்சும அறிவியலை அடிப்படையாகக் கொண்டு உருவாக்கப்பட்டுள்ளது. வந்து செல்லும் வாடிக்கையாளர்கள் தங்களின் ராசி பலன்களைத் துல்லியமாக அறியவும், தங்களின் வாழ்வாதாரத்தை ஆன்மீக ரீதியாகவும் பொருளாதார ரீதியாகவும் <strong>உயர்த்திக் கொள்ளவும்</strong> இந்த தளம் ஒரு பாலமாக அமைகிறது.
+            <h3 style="color: #007bff; margin: 10px 0 5px 0;">🎯 Core Purpose & Vision</h3>
+            <p style="margin: 0 0 15px 0; color: #e0e0e0; text-align: justify;">
+                AYMP Cosmic Kingdom bridges the sacred, ancient science of Vedic Astrology with modern Web3 technologies. The ultimate purpose of this platform is to empower global users to discover their unique energetic blueprint, receive precise cosmic guidance, and systematically elevate both their spiritual consciousness and financial well-being.
             </p>
             
-            <h3 style="color: #f0a500; margin: 15px 0 5px 0;">🎁 பிரத்யேக ரிவார்டு திட்டங்கள் (Cosmic Rewards):</h3>
-            <div style="background: rgba(0, 123, 255, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #007bff; margin-bottom: 15px;">
-                <p style="margin: 0 0 8px 0; color: #fff;"><strong>🌟 Power Arts (யந்திர வடிவங்கள் சலுகை):</strong></p>
-                <p style="margin: 0 0 12px 0; color: #ccc; font-size: 13px;">பயனர்கள் தங்களின் ராசிகளைத் தேர்வு செய்து, ஆன்மீக விவரங்களை அறியும்போது, அவர்களுக்குச் சலுகையாகப் பிரத்யேக <strong>யந்திர வடிவங்கள் மற்றும் பவர் ஆர்ட்ஸ் ரிவார்டுகள்</strong> வழங்கப்படும்.</p>
-                
-                <p style="margin: 0 0 4px 0; color: #ccc;">📆 <strong>Daily Login Reward:</strong> தினமும் கேமிற்குள் நுழைந்து லாக்-இன் செய்யும் பயனர்களுக்கு இலவச XYZ பாயிண்ட்டுகள் மற்றும் டோக்கன் பரிசுகள் உண்டு.</p>
-                <p style="margin: 0; color: #ccc;">🔗 <strong>Referral Reward:</strong> உங்கள் பரிந்துரை லிங்க் மூலம் புதிய வாடிக்கையாளர்களை அழைப்பதன் மூலம், இருவருக்குமே சிறப்பு டோக்கன் சலுகைகள் மற்றும் ஆன்மீக ரிவார்டுகள் பகிர்ந்து தரப்படும்.</p>
+            <h3 style="color: #007bff; margin: 15px 0 5px 0;">🎮 How to Play & Platform Mechanics</h3>
+            <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px solid #333; margin-bottom: 15px;">
+                <ul style="margin: 0; padding-left: 20px; color: #ccc;">
+                    <li style="margin-bottom: 8px;"><strong>Cosmic Gateway:</strong> Connect your non-custodial Web3 wallet (MetaMask or Trust Wallet) to establish your secure identity across the decentralized realm.</li>
+                    <li style="margin-bottom: 8px;"><strong>Destiny Alignment:</strong> Input your custom profile details and select your Zodiac Sign. The algorithmic engine instantly processes your planetary alignment.</li>
+                    <li style="margin-bottom: 8px;"><strong>Yantra Manifestation:</strong> Based on your customized zodiac computation, the platform generates unique, powerful, highly targeted geometric spiritual art and Yantras designed for your personal remedy and elevation.</li>
+                </ul>
             </div>
-            
-            <h3 style="color: #007bff; margin: 15px 0 5px 0;">🪙 இரட்டை டோக்கன் பொருளாதாரம் (Dual Token System):</h3>
+
+            <h3 style="color: #007bff; margin: 15px 0 5px 0;">🪙 The Dual-Token Economic Model</h3>
             <p style="margin: 0 0 10px 0; color: #e0e0e0;">
-                எங்கள் பிராஜெக்ட் வர்த்தகப் புழக்கத்தை (High Liquidity Volume) அதிகரிக்க இரண்டு டோக்கன்களை முதன்மைப்படுத்துகிறது:
+                To cultivate continuous trading volume and bulletproof network health, we deploy a robust, sustainable two-token system:
             </p>
-            <ul style="margin: 0 0 15px 0; padding-left: 20px; color: #ccc;">
-                <li><strong>1. 999xyz999 (In-Game Points/Tokens):</strong> பயனர்கள் தங்களின் ராசி, ஆன்மீக ரகசியங்கள், பவர் ஆர்ட்ஸ் மற்றும் பரிகார விவரங்களைத் தெரிந்து கொள்ள முதன்மையாகப் பயன்படுத்தும் பாயிண்ட்டுகள்.</li>
-                <li><strong>2. AYMP Token:</strong> லிக்விடிட்டி பூல் (Liquidity Pool) மூலம் பிணைக்கப்பட்ட எங்களின் முதன்மை வர்த்தக காயின்.</li>
+            <ul style="margin: 0 0 10px 0; padding-left: 20px; color: #ccc;">
+                <li style="margin-bottom: 4px;"><strong>1. 999xyz999 Token:</strong> The essential utility and access point token. Users spend this to unlock advanced daily horoscope logs, spiritual profiles, and rare Power Art minting.</li>
+                <li style="margin-bottom: 4px;"><strong>2. AYMP Token:</strong> Our primary flagship store-of-value asset, fully backed by extensive liquidity pools on decentralized automated market makers.</li>
             </ul>
-            <p style="margin: 0 0 15px 0; background: rgba(240,165,0,0.1); padding: 8px; border-left: 3px solid #f0a500; font-size: 13px;">
-                🔄 <strong>வர்த்தக விதி (Rule):</strong> 2000 = 999xyz999 KU 4AYMP. உலகளவில் அதிகப்படியான மக்கள் இந்த இரண்டு டோக்கன்களையும் எளிதாக வாங்கவும் விற்கவும் (Buy/Sell) செய்யுமாறு லிக்விடிட்டி தளம் அமைக்கப்பட்டுள்ளது.
+            <p style="margin: 0 0 15px 0; background: rgba(240,165,0,0.1); padding: 10px; border-left: 3px solid #f0a500; font-size: 13px; font-weight: bold; color: #f0a500;">
+                🔄 Ecosystem Rule: Liquid assets are mathematically balanced to stimulate constant buy/sell activity. The strategic conversion ratio ensures high operational velocity across both token pairs worldwide.
             </p>
 
-            <h3 style="color: #f0a500; margin: 15px 0 5px 0;">📋 Official Contract Addresses (BSC Network):</h3>
+            <h3 style="color: #f0a500; margin: 15px 0 5px 0;">📋 Smart Contract Addresses (BSC Network)</h3>
             <div style="background: #111; padding: 12px; border-radius: 8px; font-family: monospace; font-size: 12px; margin-bottom: 15px; border: 1px solid #333; line-height: 1.5;">
-                <span style="color: #f0a500; font-weight: bold;">⭐ AYMP Token Contract:</span><br>
+                <span style="color: #f0a500; font-weight: bold;">⭐ AYMP Token:</span><br>
                 <span style="color: #00ffcc; word-break: break-all;">0x6D85F3435EA87459AFC269E215Fa262AbD6C4EA1</span><br><br>
-                <span style="color: #f0a500; font-weight: bold;">⭐ 999xyz999 Token Contract:</span><br>
+                <span style="color: #f0a500; font-weight: bold;">⭐ 999xyz999 Token:</span><br>
                 <span style="color: #00ffcc; word-break: break-all;">0xDF09Ebe8FC19C7345918f921c9C3dEda545c4AA7</span>
             </div>
 
-            <h3 style="color: #007bff; margin: 15px 0 5px 0;">🥞 PancakeSwap-ல் வாங்கும் முறை (How to Buy):</h3>
-            <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px dashed #555; margin-bottom: 15px;">
-                <ol style="margin: 0; padding-left: 20px; color: #ccc; font-size: 13px; line-height: 1.7;">
-                    <li>முதலில் உங்கள் <strong>MetaMask</strong> அல்லது <strong>Trust Wallet</strong>-ஐத் திறந்து, அது <span style="color: #f0a500;">BNB Smart Chain (BSC)</span> நெட்வொர்க்கில் இருப்பதை உறுதிசெய்யவும்.</li>
-                    <li>வாலட்டிற்குள் இருக்கும் பிரவுசரில் <strong>pancakeswap.finance</strong> தளத்திற்குச் செல்லவும்.</li>
-                    <li>அங்கு 'Swap' பகுதிக்குச் சென்று, 'Select a Token' என்பதை அழுத்தவும்.</li>
-                    <li>மேலே உள்ள பெட்டியில் நீங்கள் வாங்க விரும்பும் காயினின் கான்ட்ராக்ட் முகவரியை (AYMP அல்லது 999xyz999 அட்ரஸை) அப்படியே காப்பி செய்து தேடலில் பேஸ்ட் (Paste) செய்யவும்.</li>
-                    <li>டோக்கன் காட்டியவுடன் <strong>Import</strong> என்பதைத் தேர்வு செய்து, உங்கள் வாலட்டில் உள்ள BNB அல்லது USDT மூலம் காயின்களை எளிதாக வாங்கிக் கொள்ளலாம்.</li>
-                    <li>வாங்கிய டோக்கன்களை எங்கள் கேமின் <strong>Liquidity Pool-ல் ஸ்டேக் (Stake) செய்வதன் மூலம்</strong> நீங்கள் தினசரி பிரத்யேக வெகுமதிகளையும் பாயிண்டுகளையும் சம்பாதிக்கலாம்!</li>
+            <h3 style="color: #007bff; margin: 15px 0 5px 0;">🥞 Step-by-Step PancakeSwap Purchase Guide</h3>
+            <div style="background: rgba(0, 123, 255, 0.05); padding: 12px; border-radius: 8px; border: 1px dashed #007bff; margin-bottom: 15px; font-size: 13px; color: #ccc;">
+                <ol style="margin: 0; padding-left: 20px; line-height: 1.6;">
+                    <li>Ensure your wallet is connected to the <strong>BNB Smart Chain (BSC)</strong> network.</li>
+                    <li>Head over to the official exchange at <strong>pancakeswap.finance</strong>.</li>
+                    <li>Inside the Swap terminal, click on 'Select a Token' and paste either the AYMP or 999xyz999 contract address listed above.</li>
+                    <li>Click <strong>Import</strong>, set your preferred slippage tolerance, and execute the trade using BNB or USDT.</li>
                 </ol>
             </div>
 
-            <h3 style="color: #f0a500; margin: 15px 0 5px 0;">🚀 பிராஜெக்ட் ரோடுமேப் (Roadmap):</h3>
-            <div style="border-left: 2px solid #007bff; padding-left: 15px; margin-left: 5px; color: #ccc;">
-                <p style="margin: 0 0 10px 0;"><strong>Phase 1:</strong> கேம் லேஅவுட் வடிவமைப்பு, ஸ்மார்ட் கான்ட்ராக்ட் உருவாக்கம் மற்றும் ஆரம்பகட்ட லிக்விடிட்டி சேர்த்தல் (Completed) ✅</p>
-                <p style="margin: 0 0 10px 0;"><strong>Phase 2:</strong> உலகளாவிய பயனர்களுக்கு டோக்கன் வர்த்தகம் (Buy/Sell) மற்றும் வாலட் இணைப்பை நேரலை செய்தல் 🌐</p>
-                <p style="margin: 0 0 10px 0;"><strong>Phase 3:</strong> ஜோதிட வாடிக்கையாளர்களுக்கான பிரத்யேக ஸ்டேக்கிங் பூல் (Staking Pool) மற்றும் நற்பலன் வெகுமதி திட்டங்கள் அறிமுகம் 🪐</p>
-                <p style="margin: 0;"><strong>Phase 4:</strong> மல்டி-செயйн விரிவாக்கம் மற்றும் AYMP குளோபல் கவுன்சில் ஆன்மீகப் பேரரசு உலகளவில் கொண்டு சேர்த்தல் 👑</p>
+            <h3 style="color: #f0a500; margin: 15px 0 5px 0;">🎁 Unified Reward Matrix</h3>
+            <ul style="margin: 0 0 15px 0; padding-left: 20px; color: #ccc; font-size: 13px;">
+                <li style="margin-bottom: 6px;"><strong>Power Arts Allocation:</strong> Selecting a zodiac unlocks highly curated, customized energetic spiritual talismans and digital yantras as performance boosters.</li>
+                <li style="margin-bottom: 6px;"><strong>Daily Check-in Rewards:</strong> Open the application daily to claim incremental, complimentary 999xyz999 tokens directly added to your layout balance.</li>
+                <li style="margin-bottom: 6px;"><strong>Decentralized Affiliate/Referral Program:</strong> Introduce friends to the gateway using your on-chain referral link to trigger instant reciprocal token bonuses for both parties.</li>
+            </ul>
+
+            <h3 style="color: #f0a500; margin: 15px 0 5px 0;">🚀 Extended Multi-Year Roadmap</h3>
+            <div style="border-left: 2px solid #007bff; padding-left: 15px; margin-left: 5px; color: #ccc; font-size: 13px; line-height: 1.7;">
+                <p style="margin: 0 0 10px 0;"><strong>Phase 1: Genesis Base</strong> – Structural game framework deployment, high-security audited dual-token asset generation, and initial DEX liquidity pool provisioning. (Completed) ✅</p>
+                <p style="margin: 0 0 10px 0;"><strong>Phase 2: Global Expansion</strong> – Activating decentralized on-chain wallet pairing setups, establishing multi-exchange swap channels, and tracking active global user accounts. 🌐</p>
+                <p style="margin: 0 0 10px 0;"><strong>Phase 3: Cosmic Financials</strong> – Launching native decentralized non-custodial Staking Pools, enabling automated high-yield harvesting, and pushing tailored astrological solutions directly inside gameplay. 🪐</p>
+                <p style="margin: 0 0 10px 0;"><strong>Phase 4: Sovereign Dominion</strong> – Launch of specialized premium decentralized autonomous consulting mechanics and cross-chain ecosystem scalability configurations. 👑</p>
+            </div>
+
+            <h3 style="color: #ff3366; margin: 15px 0 5px 0;">🛠️ Upcoming Pipeline (Future Implementations)</h3>
+            <div style="background: rgba(255, 51, 102, 0.08); padding: 12px; border-radius: 8px; border-left: 3px solid #ff3366; font-size: 13px; color: #ddd;">
+                <ul style="margin: 0; padding-left: 18px; line-height: 1.6;">
+                    <li><strong>Dynamic On-Chain Staking:</strong> Lock your tokens directly within our secure smart contract system to passively farm upgraded and exceedingly rare Power Arts/Yantras over time.</li>
+                    <li><strong>Astro NFT Marketplace:</strong> Fully tradeable web3 digital collectibles marketplace where players can list, trade, and exchange their premium zodiacal power talismans.</li>
+                </ul>
             </div>
 
         </div>
@@ -256,4 +290,4 @@
     </div>
 
 </body>
-    </html>
+        </html>
