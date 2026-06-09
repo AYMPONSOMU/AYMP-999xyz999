@@ -1,77 +1,150 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Aympon Somu Astrology</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+const scenes = [
+  { img: "images/bg_title_metamask.png", title: "Wallet Gateway", text: "Connect Your Cosmic Identity" },
+  { img: "images/bg_cosmic_lobby.png", title: "AYMP Cosmic Kingdom", text: "The Journey Begins..." },
+  { img: "images/bg_zodiac_gateway.png", title: "Choose Zodiac", text: "Select Your Destiny" },
+  { img: "images/bg_aries_reveal.png", title: "Destiny Revealed", text: "Your Journey Starts" },
+  { img: "images/bg_astro_consultation.png", title: "Astro Consultation", text: "Unlock Ancient Wisdom" },
+  { img: "images/bg_zodiac_arena.png", title: "Zodiac Arena", text: "Prove Your Power" },
+  { img: "images/bg_token_swap.png", title: "Token Realm", text: "XYZ тЖТ AYMP Path" }
+];
 
-<meta name="description" content="Love, Money, Career problems? Get personal astrology consultation with remedies.">
+let current = 0;
 
-<link rel="stylesheet" href="style.css">
-</head>
+const scene = document.getElementById("scene");
+const title = document.getElementById("title");
+const subtitle = document.getElementById("subtitle");
+const zodiacPanel = document.getElementById("zodiacPanel");
+const destinyBtn = document.getElementById("destinyBtn");
+const destinyResult = document.getElementById("destinyResult");
+const powerArtImage = document.getElementById("powerArtImage");
 
-<body>
+function enableLandscapeFullscreen() {
+    let element = document.documentElement;
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
+        if (element.requestFullscreen) { element.requestFullscreen(); }
+        else if (element.webkitRequestFullscreen) { element.webkitRequestFullscreen(); }
+    }
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('landscape').catch(err => console.log(err));
+    }
+}
 
-<header>
-<h1> Aympon Somu Astrology</h1>
-<p>Real Solutions for Real Life Problems</p>
-</header>
+function checkZodiacScene() {
+    if (scenes[current].title === "Choose Zodiac") {
+        if (zodiacPanel) zodiacPanel.style.display = "block";
+    } else {
+        if (zodiacPanel) zodiacPanel.style.display = "none";
+    }
+}
 
-<section class="hero">
-<h2>Your Problems Are Not Random</h2>
-<p> Love |  Money |  Career</p>
+function loadScene() {
+    if (scene) scene.style.backgroundImage = `url('${scenes[current].img}')`;
+    if (title) title.innerText = scenes[current].title;
+    if (subtitle) subtitle.innerText = scenes[current].text;
+    checkZodiacScene();
+}
 
-<a href="https://wa.me/918903924996?text=I%20need%20personal%20astrology%20consultation" class="btn">
- Get Your Personal Solution Now
-</a>
-</section>
+loadScene();
 
-<section class="about">
-<h2>Who Am I?</h2>
-<p>I help people understand the hidden reasons behind their life problems through astrology and provide practical remedies.</p>
-<p><b> 100+ Consultations Done</b></p>
-</section>
+document.getElementById("nextBtn").addEventListener("click", () => {
+    current++;
+    if (current >= scenes.length) current = 0;
+    loadScene();
+});
 
-<section class="problems">
-<h2>Are You Facing These?</h2>
-<p> Repeated Love Failures</p>
-<p> Financial Block</p>
-<p> Job / Career Issues</p>
-<p> Family Problems</p>
-</section>
+document.getElementById("entryBtn").addEventListener("click", () => {
+    enableLandscapeFullscreen();
+    document.getElementById("startScreen").style.display = "none";
+});
 
-<section class="solution">
-<h2>What You Will Get</h2>
-<p> Personal Horoscope Analysis</p>
-<p> Exact Problem Identification</p>
-<p> Simple & Effective Remedies</p>
-<p> One-to-One Guidance</p>
-</section>
+if (destinyBtn) {
+    destinyBtn.addEventListener("click", () => {
+        const zodiac = document.getElementById("zodiacSelect").value;
+        const name = document.getElementById("playerName").value;
+        if (!zodiac || !name) {
+            destinyResult.innerHTML = "Choose Zodiac and Enter Name";
+            return;
+        }
+        let destiny = "Cosmic Path"; let image = "images/yantra.png";
+        destinyResult.innerHTML = `${name}<br>${zodiac}<br>${destiny}`;
+        if (powerArtImage) { powerArtImage.src = image; powerArtImage.style.display = "block"; }
+    });
+}
 
-<section class="proof">
-<h2>Client Feedback</h2>
-<p> "I got clarity about my problems. Thank you!"</p>
-<p> "Accurate prediction and useful remedy."</p>
-</section>
+// ==========================================================================
+// рокро╛родрпБроХро╛рокрпНрокро╛рой рокро╛рокрпН-роЕрокрпН роУрокройрпН, роХрпБро│рпЛро╕рпН рооро▒рпНро▒рпБроорпН роирпЗро░роЯро┐ роорпКро┤ро┐рокрпЖропро░рпНрокрпНрокрпБ ро▓ро╛роЬро┐роХрпН
+// ==========================================================================
+const emblemBtn = document.getElementById("emblemBtn");
+const infoModal = document.getElementById("infoModal");
+const closeInfoBtn = document.getElementById("closeInfoBtn");
+const langSelect = document.getElementById("langSelect");
 
-<section class="offer">
-<h2>Consultation Details</h2>
-<p class="price">499 Only</p>
-<p> Duration: 20–30 Minutes</p>
-<p> Mode: WhatsApp</p>
-<p> UPI: 8903924996@ptyes</p>
+// родрооро┐ро┤рпН рооро▒рпНро▒рпБроорпН роЖроЩрпНроХро┐ро▓ родро░ро╡рпБроХро│рпН (Native Data)
+const translations = {
+    en: {
+        mainTitle: "ЁЯкР AYMP WHITEPAPER",
+        sec1Title: "ЁЯОп Core Purpose & Vision",
+        sec1Text: "AYMP Cosmic Kingdom bridges the sacred, ancient science of Vedic Astrology with modern Web3 technologies. The ultimate purpose of this platform is to empower global users to discover their unique energetic blueprint, receive precise cosmic guidance, and systematically elevate both their spiritual consciousness and financial well-being.",
+        sec2Title: "ЁЯОо How to Play & Platform Mechanics",
+        sec2List: "<li style='margin-bottom:8px;'><strong>Cosmic Gateway:</strong> Connect your wallet to establish your identity.</li><li style='margin-bottom:8px;'><strong>Destiny Alignment:</strong> Input your custom profile and select your Zodiac Sign.</li><li style='margin-bottom:8px;'><strong>Yantra Manifestation:</strong> System generates powerful targeted geometric spiritual art and Yantras.</li>",
+        sec3Title: "ЁЯкЩ The Dual-Token Economic Model",
+        sec3Text: "To cultivate continuous trading volume and network health, we deploy a robust, sustainable two-token system: 1. 999xyz999 Token (Utility) and 2. AYMP Token (Store of value backed by liquidity pools).",
+        sec4Title: "ЁЯУЛ Smart Contract Addresses (BSC Network)",
+        sec5Title: "ЁЯЪА Extended Multi-Year Roadmap",
+        roadmap: "<p><strong>Phase 1: Genesis Base</strong> тАУ Framework deployment. (Completed) тЬЕ</p><p><strong>Phase 2: Global Expansion</strong> тАУ Wallet pairing activation. ЁЯМР</p><p><strong>Phase 3: Cosmic Financials</strong> тАУ Launching staking pools. ЁЯкР</p><p><strong>Phase 4: Sovereign Dominion</strong> тАУ Autonomous consulting mechanics. ЁЯСС</p>"
+    },
+    ta: {
+        mainTitle: "ЁЯкР AYMP роТропро┐роЯрпНрокрпЗрокрпНрокро░рпН (Whitepaper)",
+        sec1Title: "ЁЯОп роорпБродройрпНроорпИ роирпЛроХрпНроХроорпН рооро▒рпНро▒рпБроорпН рокро╛ро░рпНро╡рпИ",
+        sec1Text: "AYMP роХро╛ро╕рпНрооро┐роХрпН роХро┐роЩрпНроЯроорпН роОройрпНрокродрпБ рокро┤роорпИропро╛рой ро╡рпЗрод роЬрпЛродро┐роЯ роЕро▒ро┐ро╡ро┐ропро▓рпИропрпБроорпН роиро╡рпАрой Web3 родрпКро┤ро┐ро▓рпНроирпБроЯрпНрокроЩрпНроХро│рпИропрпБроорпН роЗрогрпИроХрпНроХрпБроорпН роТро░рпБ родро│рооро╛роХрпБроорпН. роЙро▓роХро│ро╛ро╡ро┐роп рокропройро░рпНроХро│рпН родроЩрпНроХро│ро┐ройрпН родройро┐родрпНродрпБро╡рооро╛рой роЖро▒рпНро▒ро▓рпИ роЕро▒ро┐роирпНродрпБ, родрпБро▓рпНро▓ро┐ропрооро╛рой рокро┐ро░рокроЮрпНроЪ ро╡ро┤ро┐роХро╛роЯрпНроЯрпБродро▓рпИрокрпН рокрпЖро▒рпНро▒рпБ, роЖройрпНроорпАроХ ро╡ро┐ро┤ро┐рокрпНрокрпБрогро░рпНро╡рпИропрпБроорпН роиро┐родро┐ роиро┐ро▓роорпИропрпИропрпБроорпН роТро░рпЗ роирпЗро░родрпНродро┐ро▓рпН роЙропро░рпНродрпНродрпБро╡родрпЗ роЗродройрпН роЗро▒рпБродро┐ роирпЛроХрпНроХрооро╛роХрпБроорпН.",
+        sec2Title: "ЁЯОо ро╡ро┐ро│рпИропро╛роЯрпБро╡родрпБ роОрокрпНрокроЯро┐? (Platform Mechanics)",
+        sec2List: "<li style='margin-bottom:8px;'><strong>рокро┐ро░рокроЮрпНроЪ роирпБро┤рпИро╡ро╛ропро┐ро▓рпН:</strong> роЙроЩрпНроХро│рпН рокро╛родрпБроХро╛рокрпНрокро╛рой роЕроЯрпИропро╛ро│родрпНродрпИ роЙро░рпБро╡ро╛роХрпНроХ роорпЖроЯрпНроЯро╛рооро╕рпНроХрпН ро╡ро╛ро▓роЯрпНроЯрпИ роЗрогрпИроХрпНроХро╡рпБроорпН.</li><li style='margin-bottom:8px;'><strong>ро╡ро┐родро┐рокрпНрокропройрпН роХрогроХрпНроХрпАроЯрпБ:</strong> роЙроЩрпНроХро│рпН рокрпЖропро░рпИ роЙро│рпНро│ро┐роЯрпНроЯрпБ ро░ро╛роЪро┐ропрпИродрпН родрпЗро░рпНро╡рпБ роЪрпЖропрпНропро╡рпБроорпН. роЪро┐ро╕рпНроЯроорпН роЙроЩрпНроХро│рпН роХро┐ро░роХ роиро┐ро▓рпИроХро│рпИ роЖро░ро╛ропрпБроорпН.</li><li style='margin-bottom:8px;'><strong>ропроирпНродро┐ро░ ро╡роЯро┐ро╡роорпН:</strong> роЙроЩрпНроХро│рпН ро░ро╛роЪро┐роХрпНроХрпБро░ро┐роп родройро┐рокрпНрокропройро╛роХрпНроХрокрпНрокроЯрпНроЯ роЪроХрпНродро┐ро╡ро╛ропрпНроирпНрод роЖройрпНроорпАроХ ро╡роЯро┐ро╡ро┐ропро▓рпН роХро▓рпИроХро│рпН рооро▒рпНро▒рпБроорпН ропроирпНродро┐ро░роЩрпНроХро│рпН роЙроЩрпНроХро│рпБроХрпНроХро╛роХ роЙро░рпБро╡ро╛роХрпНроХрокрпНрокроЯрпБроорпН.</li>",
+        sec3Title: "ЁЯкЩ роЗро░роЯрпНроЯрпИ роЯрпЛроХрпНроХройрпН рокрпКро░рпБро│ро╛родро╛ро░ роорпБро▒рпИ",
+        sec3Text: "родрпКроЯро░рпНроЪрпНроЪро┐ропро╛рой ро╡ро░рпНродрпНродроХроорпН рооро▒рпНро▒рпБроорпН роирпЖроЯрпНро╡рпКро░рпНроХрпН рокро╛родрпБроХро╛рокрпНрокро┐ро▒рпНроХро╛роХ, роиро╛роЩрпНроХро│рпН роЗро░рогрпНроЯрпБ роЯрпЛроХрпНроХройрпН роорпБро▒рпИропрпИроЪрпН роЪрпЖропро▓рпНрокроЯрпБродрпНродро┐ропрпБро│рпНро│рпЛроорпН: 1. 999xyz999 роЯрпЛроХрпНроХройрпН (рокропройрпНрокро╛роЯрпНроЯро┐ро▒рпНроХрпБ) рооро▒рпНро▒рпБроорпН 2. AYMP роЯрпЛроХрпНроХройрпН (роорпБродро▓рпАроЯрпБ рооро▒рпНро▒рпБроорпН ро▓ро┐роХрпНро╡ро┐роЯро┐роЯрпНроЯро┐ рокрпВро▓рпН рокро╛родрпБроХро╛рокрпНрокрпБ роХрпКрогрпНроЯродрпБ).",
+        sec4Title: "ЁЯУЛ ро╕рпНрооро╛ро░рпНроЯрпН роХро╛рогрпНроЯрпНро░ро╛роХрпНроЯрпН роорпБроХро╡ро░ро┐роХро│рпН (BSC Network)",
+        sec5Title: "ЁЯЪА ро╡ро┐ро░ро┐ро╡ро╛рой рокро▓ ро╡ро░рпБроЯ ро░рпЛроЯрпБроорпЗрокрпН (Roadmap)",
+        roadmap: "<p><strong>роХроЯрпНроЯроорпН 1: родрпКроЯроХрпНроХроорпН</strong> тАУ роХрпЗроорпН роХроЯрпНроЯроорпИрокрпНрокрпБ роЙро░рпБро╡ро╛роХрпНроХроорпН рооро▒рпНро▒рпБроорпН роЯрпЛроХрпНроХройрпН ро╡рпЖро│ро┐ропрпАроЯрпБ. (роорпБроЯро┐ро╡роЯрпИроирпНродродрпБ) тЬЕ</p><p><strong>роХроЯрпНроЯроорпН 2: роЙро▓роХро│ро╛ро╡ро┐роп ро╡ро┐ро░ро┐ро╡ро╛роХрпНроХроорпН</strong> тАУ ро╡ро╛ро▓роЯрпН роЗрогрпИрокрпНрокрпБ рооро▒рпНро▒рпБроорпН роОроХрпНро╕рпНроЪрпЗроЮрпНроЪрпН ро╡ро░рпНродрпНродроХроорпН родрпКроЯроЩрпНроХрпБродро▓рпН. ЁЯМР</p><p><strong>роХроЯрпНроЯроорпН 3: роЖройрпНроорпАроХ роиро┐родро┐</strong> тАУ роЯрпЛроХрпНроХройрпНроХро│рпИ ро╕рпНроЯрпЗроХрпНроХро┐роЩрпН (Staking) роЪрпЖропрпНродрпБ ро▓ро╛рокроорпН роИроЯрпНроЯрпБроорпН ро╡роЪродро┐. ЁЯкР</p><p><strong>роХроЯрпНроЯроорпН 4: роорпБро┤рпБ роЖродро┐роХрпНроХроорпН</strong> тАУ рокро░ро╡ро▓ро╛роХрпНроХрокрпНрокроЯрпНроЯ родройрпНройро╛роЯрпНроЪро┐ роЖро▓рпЛроЪройрпИ роорпБро▒рпИроХро│рпИ роЕро▒ро┐роорпБроХрокрпНрокроЯрпБродрпНродрпБродро▓рпН. ЁЯСС</p>"
+    }
+};
 
-<a href="https://wa.me/918903924996" class="btn"> Send Payment Screenshot</a>
-</section>
+// рокроЯрпНроЯройрпН роХро┐ро│ро┐роХрпНроХрпБроХро│рпБроХрпНроХро╛рой роирпЗро░роЯро┐ роЪрпЖропро▓рпНрокро╛роЯрпБроХро│рпН
+if (emblemBtn && infoModal && closeInfoBtn) {
+    emblemBtn.onclick = function(e) {
+        e.stopPropagation();
+        infoModal.style.display = "block";
+    };
 
-<section class="urgent">
-<h2> Limited Slots Available</h2>
-<p>Serious people only. Book now before slots fill.</p>
-</section>
+    closeInfoBtn.onclick = function(e) {
+        e.stopPropagation();
+        infoModal.style.display = "none";
+    };
 
-<footer>
-<p>© 2026 Aympon Somu</p>
-</footer>
+    // Popup ро╡рпЖро│ро┐ропрпЗ родрпКроЯрпНроЯро╛ро▓рпН Close
+document.addEventListener("click", function(e){
 
-</body>
-</html>
+    if(
+        infoModal.style.display === "block" &&
+        !infoModal.contains(e.target) &&
+        e.target !== emblemBtn
+    ){
+        infoModal.style.display = "none";
+    }
+
+});
+
+// роорпКро┤ро┐ рооро╛ро▒рпБроорпН рокрпЛродрпБ роЯрпЖроХрпНро╕рпНроЯрпНроХро│рпИ рооро╛ро▒рпНро▒рпБроорпН ро▓ро╛роЬро┐роХрпН
+if (langSelect) {
+    langSelect.onchange = function() {
+        const lang = langSelect.value;
+        document.getElementById("modalMainTitle").innerHTML = translations[lang].mainTitle;
+        document.getElementById("sec1Title").innerHTML = translations[lang].sec1Title;
+        document.getElementById("sec1Text").innerHTML = translations[lang].sec1Text;
+        document.getElementById("sec2Title").innerHTML = translations[lang].sec2Title;
+        document.getElementById("sec2List").innerHTML = translations[lang].sec2List;
+        document.getElementById("sec3Title").innerHTML = translations[lang].sec3Title;
+        document.getElementById("sec3Text").innerHTML = translations[lang].sec3Text;
+        document.getElementById("sec4Title").innerHTML = translations[lang].sec4Title;
+        document.getElementById("sec5Title").innerHTML = translations[lang].sec5Title;
+        document.getElementById("roadmapText").innerHTML = translations[lang].roadmap;
+    };
+      }
