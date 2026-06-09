@@ -2,81 +2,76 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Aympon Somu Astrology</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Love, Money, Career problems? Get personal astrology consultation with remedies.">
+
 <link rel="stylesheet" href="style.css">
-
-<style>
-/* மொபைல் திரையில் குழப்பம் வராமல் தடுக்க */
-#web3-gateway {
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: #050505; z-index: 9999; padding: 10px; box-sizing: border-box;
-    overflow-y: auto;
-}
-.gateway-card {
-    background: #1f2833; border: 2px solid #f0a500;
-    padding: 20px; border-radius: 15px; width: 95%; max-width: 400px;
-    text-align: center; color: #fff; box-shadow: 0 0 20px rgba(240, 165, 0, 0.3);
-}
-.gt-btn { width: 100%; padding: 15px; margin: 8px 0; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; }
-.btn-enter { background: #45f3ff; color: #000; margin-top: 15px; }
-
-/* அஸ்ட்ரோ இன்ஜின் ஸ்டைல் */
-.astro-engine-box { background: #11141a; border: 2px solid #f0a500; padding: 15px; border-radius: 15px; margin: 20px auto; max-width: 400px; }
-input, select { width: 100%; padding: 10px; margin: 5px 0 15px 0; border-radius: 5px; border: 1px solid #444; background: #000; color: #fff; box-sizing: border-box; }
-</style>
 </head>
+
 <body>
 
-<div id="web3-gateway">
-    <div class="gateway-card">
-        <h2>AYMP KINGDOM</h2>
-        <div id="pointsDisplay" style="color:#f0a500; font-weight:bold; margin:15px 0; font-size:18px;">Cosmic Points: 0</div>
-        <button class="gt-btn" style="background:#f0a500;" onclick="connectWallet()">Connect Wallet</button>
-        <button class="gt-btn" style="background:#28a745; color:#fff;" onclick="claimDailyReward()">Daily Reward</button>
-        <button class="gt-btn btn-enter" onclick="enterGame()">Enter Cosmic Realm ▶</button>
-    </div>
-</div>
+<header>
+<h1> Aympon Somu Astrology</h1>
+<p>Real Solutions for Real Life Problems</p>
+</header>
 
-<div id="main-content">
-    <header><h1>Aympon Somu Astrology</h1></header>
-    
-    <div class="astro-engine-box">
-        <h3 style="color:#f0a500; margin-top:0;">🔮 Astro-Strategic Solver</h3>
-        <input type="text" id="playerName" placeholder="Name">
-        <select id="zodiacSelect">
-            <option value="mesh">Aries / மேஷம்</option>
-            <option value="rishabh">Taurus / ரிஷபம்</option>
-        </select>
-        <button onclick="revealDestiny()" style="width:100%; padding:10px; background:#f0a500; border:none; border-radius:5px;">REVEAL DESTINY</button>
-        <div id="destinyResult"></div>
-        <img id="powerArtImage" src="AYMPONSOMU astro-strategic Global Council.jpg" style="display:none; width:100%; margin-top:15px; border-radius:10px;">
-    </div>
-    
-    <footer><p>© 2026 Aympon Somu</p></footer>
-</div>
+<section class="hero">
+<h2>Your Problems Are Not Random</h2>
+<p> Love |  Money |  Career</p>
 
-<script>
-let cosmicPoints = 0; walletConnected = false;
+<a href="https://wa.me/918903924996?text=I%20need%20personal%20astrology%20consultation" class="btn">
+ Get Your Personal Solution Now
+</a>
+</section>
 
-function connectWallet() {
-    walletConnected = true; cosmicPoints += 500;
-    document.getElementById("pointsDisplay").innerText = "Cosmic Points: " + cosmicPoints;
-    alert("Wallet Connected!");
-}
+<section class="about">
+<h2>Who Am I?</h2>
+<p>I help people understand the hidden reasons behind their life problems through astrology and provide practical remedies.</p>
+<p><b> 100+ Consultations Done</b></p>
+</section>
 
-function enterGame() {
-    if(!walletConnected) { alert("Connect Wallet First!"); return; }
-    document.getElementById("web3-gateway").style.display = "none";
-}
+<section class="problems">
+<h2>Are You Facing These?</h2>
+<p> Repeated Love Failures</p>
+<p> Financial Block</p>
+<p> Job / Career Issues</p>
+<p> Family Problems</p>
+</section>
 
-function revealDestiny() {
-    document.getElementById("destinyResult").innerHTML = "<p style='color:#fff; padding:10px; border:1px solid #f0a500;'>🔮 Prediction generated for " + document.getElementById("playerName").value + "</p>";
-    document.getElementById("powerArtImage").style.display = "block";
-}
+<section class="solution">
+<h2>What You Will Get</h2>
+<p> Personal Horoscope Analysis</p>
+<p> Exact Problem Identification</p>
+<p> Simple & Effective Remedies</p>
+<p> One-to-One Guidance</p>
+</section>
 
-function claimDailyReward() { cosmicPoints += 50; document.getElementById("pointsDisplay").innerText = "Cosmic Points: " + cosmicPoints; }
-</script>
+<section class="proof">
+<h2>Client Feedback</h2>
+<p> "I got clarity about my problems. Thank you!"</p>
+<p> "Accurate prediction and useful remedy."</p>
+</section>
+
+<section class="offer">
+<h2>Consultation Details</h2>
+<p class="price">499 Only</p>
+<p> Duration: 20–30 Minutes</p>
+<p> Mode: WhatsApp</p>
+<p> UPI: 8903924996@ptyes</p>
+
+<a href="https://wa.me/918903924996" class="btn"> Send Payment Screenshot</a>
+</section>
+
+<section class="urgent">
+<h2> Limited Slots Available</h2>
+<p>Serious people only. Book now before slots fill.</p>
+</section>
+
+<footer>
+<p>© 2026 Aympon Somu</p>
+</footer>
+
 </body>
 </html>
