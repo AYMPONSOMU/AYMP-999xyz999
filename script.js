@@ -86,7 +86,6 @@ function loadScene() {
     if (title) title.innerText = scenes[current].title;
     if (subtitle) subtitle.innerText = scenes[current].text;
     
-    // ராசி தேர்ந்தெடுக்கும் பேனலைச் சரிபார்க்கிறது
     checkZodiacScene();
 }
 
@@ -171,37 +170,28 @@ if (destinyBtn) {
     });
 }
 
-// HTML முழுமையாக லோடு ஆன பின் எம்பளம் பட்டன் மற்றும் பாப்-அப் விண்டோவை இணைக்கும் பகுதி
-window.addEventListener("DOMContentLoaded", () => {
-    const emblemBtn = document.getElementById("emblemBtn");
-    const infoModal = document.getElementById("infoModal");
-    const closeInfoBtn = document.getElementById("closeInfoBtn");
+// பாப்-அப் திறக்க மற்றும் மூட மிக உறுதியான ஜாவாஸ்கிரிப்ட் லாஜிக் (மாற்றப்பட்டது)
+const emblemBtn = document.getElementById("emblemBtn");
+const infoModal = document.getElementById("infoModal");
+const closeInfoBtn = document.getElementById("closeInfoBtn");
 
-    if (emblemBtn && infoModal && closeInfoBtn) {
-        // எம்பளத்தை தொட்டவுடன் விண்டோ ஓபன் ஆகும்
-        emblemBtn.addEventListener("click", (e) => {
-            e.stopPropagation(); // கேமின் மற்ற பேக்ரவுண்ட் கிளிக்குகளைத் தடுக்க
-            infoModal.style.display = "block";
-        });
+if (emblemBtn && infoModal && closeInfoBtn) {
+    // எம்பளத்தை அழுத்தும்போது விண்டோ ஓபன் ஆகும்
+    emblemBtn.onclick = function(e) {
+        e.stopPropagation();
+        infoModal.style.display = "block";
+    };
 
-        // க்ளோஸ் பட்டனை தொட்டவுடன் விண்டோ மூடிக்கொள்ளும்
-        closeInfoBtn.addEventListener("click", () => {
+    // குளோஸ் பட்டனை அழுத்தும்போது விண்டோ கச்சிதமாக மூடும்
+    closeInfoBtn.onclick = function(e) {
+        e.stopPropagation();
+        infoModal.style.display = "none";
+    };
+
+    // பாப்-அப் விண்டோவிற்கு வெளியே திரையில் எங்கு தொட்டாலும் விண்டோ மூடும்
+    window.addEventListener("click", function(e) {
+        if (e.target === infoModal) {
             infoModal.style.display = "none";
-        });
-
-        // விண்டோவிற்கு வெளியே எங்கு தொட்டாலும் மூடிக்கொள்ளும் கூடுதல் வசதி
-        window.addEventListener("click", (e) => {
-            if (e.target === infoModal) {
-                infoModal.style.display = "none";
-            }
-        });
-    }
-});
-// கூகுள் மொழிபெயர்ப்பு விட்ஜெட்டைத் தொடங்குவதற்கான ஃபங்ஷன்
-function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-        pageLanguage: 'en', 
-        includedLanguages: 'ta,en,hi,zh-CN,es,fr,de,ar,it,ja,ko,pt', // உங்களுக்குத் தேவையான உலகளாவிய மொழிகள் (தமிழ் உட்பட)
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-}
+        }
+    });
+                                }
